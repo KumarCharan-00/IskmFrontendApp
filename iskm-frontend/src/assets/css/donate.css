@@ -1,0 +1,417 @@
+.donate-page {
+  min-height: 100vh;
+}
+
+.donate-hero {
+  background: linear-gradient(135deg, #ee5fb79c 0%, #ee5fb7 100%);
+  color: white;
+  padding: 80px 0;
+}
+
+.donate-hero .hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.donate-hero .hero-subtitle {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+.donation-cards-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.donation-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid transparent;
+  border-radius: 15px;
+}
+
+.donation-card:hover {
+  transform: translateY(-5px);
+  border-color: #ee5fb7;
+}
+
+.donation-card .card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.donation-card .card-subtitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ee5fb79c !important;
+}
+
+.donation-form-section {
+  background-color: #f8f9fa;
+}
+
+.bank-details-section .card {
+  border-left: 4px solid #ee5fb7;
+}
+
+/* Responsive adjustments */
+
+@media (min-width: 992px) {
+  .donation-card {
+    width: 80vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .donate-hero .hero-title {
+    font-size: 2rem;
+  }
+  
+  .donate-hero .hero-subtitle {
+    font-size: 1rem;
+  }
+}
+
+/* Contact Card Container */
+.get-in-touch {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.get-in-touch:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(238, 95, 183, 0.2) !important;
+}
+
+/* Contact Us Form Header */
+.query-form-title {
+  background: linear-gradient(135deg, #ee5fb7 0%, #d84ea0 100%);
+  padding: 2rem 2rem 1.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.query-form-title::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-20px, -20px); }
+}
+
+.query-form-title h4 {
+  position: relative;
+  z-index: 1;
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+}
+
+.query-form-title p {
+  position: relative;
+  z-index: 1;
+  font-size: 0.9rem;
+}
+
+/* Form Body */
+.query-form-body {
+  padding: 2.5rem 2rem 2rem 2rem;
+  background: linear-gradient(to bottom, #ffffff 0%, #fafafa 100%);
+}
+
+/* Submit Button */
+.submit-btn,
+.donate-submit-btn {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-icon {
+  font-size: 1.25rem;
+  transition: transform 0.3s ease;
+}
+
+.submit-btn:hover .btn-icon {
+  transform: translateX(5px);
+}
+
+.submit-btn::before,
+.donate-submit-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.submit-btn:hover::before {
+  left: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .query-form-title {
+    padding: 1.5rem 1.5rem 1.25rem 1.5rem;
+  }
+  
+  .query-form-title h4 {
+    font-size: 1.25rem;
+  }
+  
+  .query-form-body {
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
+  }
+  
+  .form-input {
+    font-size: 0.95rem;
+  }
+}
+
+/* Donation Card Container */
+.donate-card {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.donate-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(74, 144, 226, 0.2) !important;
+}
+
+/* Donation Form Header */
+.donate-form-title {
+  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+  padding: 2rem 2rem 1.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.donate-form-title::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  animation: shimmer 3s infinite;
+}
+
+.donate-form-title h4 {
+  position: relative;
+  z-index: 1;
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+}
+
+.donate-form-title p {
+  position: relative;
+  z-index: 1;
+  font-size: 0.9rem;
+}
+
+/* Form Body */
+.donate-form-body {
+  padding: 2.5rem 2rem 2rem 2rem;
+  background: linear-gradient(to bottom, #ffffff 0%, #fafafa 100%);
+}
+
+/* Donation Label */
+.donation-label {
+  color: #2c3e50;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Amount Selection Buttons */
+.amount-btn {
+  border: 2px solid #4a90e2;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: #fff;
+  color: #4a90e2;
+  position: relative;
+  overflow: hidden;
+}
+
+.amount-btn:hover {
+  background-color: #e3f2fd;
+  border-color: #357abd;
+}
+
+.amount-btn-active,
+.amount-btn-active:hover {
+  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+  border-color: #357abd;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+}
+
+.amount-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.5s, height 0.5s;
+}
+
+.amount-btn:active::before {
+  width: 200px;
+  height: 200px;
+}
+
+/* Custom Amount Input Animation */
+.custom-amount-input {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Donate Submit Button */
+.donate-submit-btn {
+  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+}
+
+.donate-submit-btn:hover {
+  background: linear-gradient(135deg, #357abd 0%, #2968a8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(74, 144, 226, 0.3);
+}
+
+.donate-submit-btn:hover::before {
+  left: 100%;
+}
+
+
+/* Responsive Design for Donation Card */
+@media (max-width: 768px) {
+  .donate-form-title {
+    padding: 1.5rem 1.5rem 1.25rem 1.5rem;
+  }
+  
+  .donate-form-title h4 {
+    font-size: 1.25rem;
+  }
+  
+  .donate-form-body {
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
+  }
+  
+  .amount-btn {
+    font-size: 0.9rem;
+    padding: 0.65rem 0.75rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .amount-btn {
+    font-size: 0.85rem;
+    padding: 0.6rem 0.5rem;
+  }
+}
+
+/* Bootstrap Override for Amount Buttons */
+.amount-btn.btn-outline-primary {
+  border-color: #4a90e2;
+  color: #4a90e2;
+}
+
+.amount-btn.btn-outline-primary:hover {
+  background-color: #e3f2fd;
+  border-color: #357abd;
+  color: #357abd;
+}
+
+.amount-btn.btn-primary {
+  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+  border-color: #357abd;
+}
+
+.amount-buttons-container {
+    gap: 8px !important;
+}
+
+.amount-btn {
+    flex: 1 0 calc(25% - 8px);
+    min-width: 80px;
+    transition: all 0.3s ease;
+    border-radius: 12px;
+    padding: 10px 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.amount-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.amount-btn-active {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .amount-buttons-container {
+        gap: 6px !important;
+    }
+    
+    .amount-btn {
+        flex: 1 0 calc(50% - 6px);
+        min-width: 70px;
+        max-width: none;
+        font-size: 0.85rem;
+        padding: 8px 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .amount-btn {
+        flex: 1 0 calc(50% - 4px);
+        min-width: 60px;
+        font-size: 0.8rem;
+        padding: 6px 4px;
+    }
+}

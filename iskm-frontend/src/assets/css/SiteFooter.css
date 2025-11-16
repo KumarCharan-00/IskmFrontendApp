@@ -1,0 +1,59 @@
+/* Responsive horizontal margins for the footer container - matching navbar spacing */
+
+@media (min-width: 992px) {
+    .site-footer-container {
+        margin-left: clamp(2vw, 3vw + 5%, 17vw);
+        margin-right: clamp(2vw, 3vw + 5%, 17vw);
+    }
+}
+
+@media (max-width: 992px) {
+    .site-footer-container {
+        margin-left: 2vw;
+        margin-right: 2vw;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .site-footer-container > .d-flex {
+        flex-direction: column !important;
+        align-items: center;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .site-footer-container nav {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .site-footer-container .donate-btn {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .site-footer-container .d-flex.gap-2 {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .site-footer-container .text-lg-end {
+        text-align: center !important;
+    }
+
+    .site-footer-container .logo {
+        margin: 0 auto;
+    }
+
+    .site-footer-container .footer-bottom {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding-top: 1rem;
+    }
+}
+
+.site-footer-container > .d-flex {
+    align-items: center; /* vertical centering */
+    flex-wrap: wrap;
+    justify-content: space-between; /* keep left and right sections spaced */
+}

@@ -1,0 +1,247 @@
+/* App-level tweaks to align with the wireframe */
+
+/* Reset body for Bootstrap */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#root, .App {
+  width: 100%;
+  margin: 0%;
+}
+
+/* Navbar active tab styled like a soft pill */
+.navbar .nav-link.active {
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+/* Ensure carousel images cover within 16:9 wrapper */
+.object-fit-cover {
+  object-fit: cover;
+}
+
+.btn {
+  border-radius: 25px;
+  padding: 0.6em 1.2em;
+  border: none;
+  cursor: pointer;
+  transition: all ease 0.25s;
+}
+
+.color-blue {
+  color: #2968a8 !important;
+}
+
+.color-pink {
+  color: #ee5fb7 !important;
+}
+
+.custom-btn,
+.custom-btn-blue,
+.custom-btn-pink {
+  letter-spacing: 0.5px;
+  color: white;
+}
+
+.custom-btn-blue,
+.custom-btn-pink {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.custom-btn-blue,
+.custom-btn-blue:active {
+  background: linear-gradient(135deg, #3f69c0 0%, #345ea7 100%);
+}
+
+.custom-btn-pink,
+.custom-btn-pink:active {
+  background: #ee5fb7 !important;
+}
+
+.custom-btn:hover,
+.custom-btn-blue:hover,
+.custom-btn-pink:hover {
+  transform: scale(1.05);
+  translate: 2px;
+}
+
+.custom-btn-blue:hover,
+.custom-btn-pink:hover {
+  color: white !important;
+}
+
+.custom-btn-blue:hover {
+  background: linear-gradient(135deg, #357abd 0%, #2968a8 100%)
+}
+
+.custom-btn-pink:hover {
+  background: #ee5fb7e4 !important;
+}
+
+.custom-btn:active,
+.custom-btn-blue:active,
+.custom-btn-pink:active {
+  transform: scale(1);
+  translate: 0;
+  border: none !important;
+}
+
+.custom-link-btn,
+.custom-link-btn-pink,
+.custom-link-btn-white,
+.custom-link-btn-blue {
+  background: transparent;
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+} 
+
+.custom-link-btn-pink,
+.custom-link-btn-pink:active {
+  color: #ee5fb7;
+}
+
+.custom-link-btn-white,
+.custom-link-btn-white:active {
+  color: white;
+}
+
+.custom-link-btn-blue,
+.custom-link-btn-blue:active {
+  color: #345ea7;
+}
+
+.custom-link-btn:hover
+.custom-link-btn-blue:hover,
+.custom-link-btn-pink:hover,
+.custom-link-btn-white:hover {
+  background: transparent;
+  transform: scale(1.05);
+  translate: 2px;
+}
+
+.custom-link-btn-pink:hover {
+  color: #ee5fb7e4;
+}
+
+.custom-link-btn-white:hover {
+  color: rgba(255, 255, 255, 0.827);
+}
+
+.custom-link-btn-blue:hover {
+  color: #3d6ec2;
+}
+
+.custom-link-btn:active
+.custom-link-btn-blue:active,
+.custom-link-btn-pink:active,
+.custom-link-btn-white:active {
+  transform: scale(1);
+  translate: 0;
+}
+
+/* Utility to force any image to fill its container while preserving crop */
+.img-cover,
+.picture-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.picture-cover {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Home hero area centered with a max width similar to the mock */
+.home-hero {
+  display: flex;
+  justify-content: center;
+}
+
+
+/* Form Inputs */
+.form-input,
+.form-input-blue,
+.form-input-pink {
+  border: 2px solid #e9ecef;
+  border-radius: 0.75rem;
+  padding: 1rem 0.75rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: #ffffffd8;
+}
+
+.form-input:focus,
+.form-input-blue:focus,
+.form-input-pink:focus {
+  background-color: #ffffff;
+}
+
+.form-input-pink:focus {
+  border-color: #ee5fb7;
+  box-shadow: 0 0 0 0.2rem rgba(238, 95, 183, 0.15);
+}
+
+.form-input-blue:focus {
+  border-color: #357abd;
+  box-shadow: 0 0 0 0.2rem rgba(53, 122, 189, 0.15);
+}
+
+.form-input::placeholder,
+.form-input-blue::placeholder,
+.form-input-pink::placeholder {
+  color: #adb5bd;
+}
+
+/* Floating Labels */
+.form-floating > label {
+  color: #6c757d;
+  font-weight: 500;
+  padding-left: 0.75rem;
+}
+
+.form-floating > .form-input:focus ~ label,
+.form-floating > .form-input:not(:placeholder-shown) ~ label {
+  transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+}
+
+.form-floating > .form-input-pink:focus ~ label,
+.form-floating > .form-input-pink:not(:placeholder-shown) ~ label {
+  color: #ee5fb7;
+  transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+}
+
+.form-floating > .form-input-blue:focus ~ label,
+.form-floating > .form-input-blue:not(:placeholder-shown) ~ label {
+  color: #357abd;
+  transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+}
+
+/* Message Textarea */
+.message-input {
+  resize: vertical;
+  min-height: 120px;
+  max-height: 250px;
+}
+
+/* Validation States */
+.form-control:invalid:not(:placeholder-shown) {
+  border-color: #dc3545;
+}
+
+.form-control:valid:not(:placeholder-shown) {
+  border-color: #28a745;
+}
+
+/* Focus Within Effect */
+.form-floating:focus-within {
+  transform: translateX(2px);
+}

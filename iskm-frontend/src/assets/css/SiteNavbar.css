@@ -1,0 +1,53 @@
+/* Responsive horizontal margins for the navbar container */
+
+
+@media (min-width: 992px) {
+    .site-navbar-container {
+        margin-left: clamp(2vw, 3vw + 5%, 17vw);
+        margin-right: clamp(2vw, 3vw + 5%, 17vw);
+    }
+}
+
+@media (max-width: 992px) {
+    .site-navbar-container {
+        margin-left: 2vw;
+        margin-right: 2vw;
+    }
+}
+
+
+/* Ensure desktop shows expanded navbar (not mobile) */
+@media (min-width: 992px) {
+    .navbar-expand-lg .navbar-collapse {
+        display: flex !important;
+    }
+
+    .navbar-expand-lg .navbar-toggler {
+        display: none;
+    }
+
+    /* Center align for xs and sm (<992px) */
+    @media (max-width: 992px) {
+        .navbar-nav {
+            align-items: center;
+        }
+    }
+}
+
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        width: 100%;
+    }
+
+    .navbar-nav {
+        flex-direction: column !important;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nav-link {
+        flex: 1 1 auto;
+        text-align: center;
+        min-width: 120px; /* optional: ensures links don’t shrink too much */
+    }
+}

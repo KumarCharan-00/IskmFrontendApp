@@ -1,0 +1,214 @@
+/* Make the right arrow smaller and always visible */
+
+@media (min-width: 996px) {
+    .container.carousel-container {
+        padding: 2vh 7vw !important;
+    }   
+}
+
+.container.carousel-container {
+    padding: 2vh 2vw;
+} 
+
+/* Style the arrow icon itself */
+.custom-carousel .carousel-control-prev-icon,
+.custom-carousel .carousel-control-next-icon {
+    background-size: 60% 60%; /* smaller arrow graphic */
+    filter: brightness(100) saturate(100%) invert(20%) sepia(10%) saturate(500%)
+        hue-rotate(180deg);
+    padding: 2vw;
+}
+
+/* Fixed height for carousel across breakpoints */
+.custom-carousel {
+    max-height: 600px;
+    height: 600px;
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+/* Ensure all inner elements match the fixed height */
+.custom-carousel .carousel-inner,
+.custom-carousel .carousel-item,
+.custom-carousel .carousel-item img,
+.custom-carousel .slide-content {
+    height: 100%;
+    max-height: 600px;
+}
+
+/* Responsive height adjustments */
+@media (max-width: 992px) {
+    .custom-carousel {
+        max-height: 500px;
+        height: 500px;
+    }
+
+    .custom-carousel .carousel-inner,
+    .custom-carousel .carousel-item,
+    .custom-carousel .carousel-item img,
+    .custom-carousel .slide-content {
+        height: 100%;
+        max-height: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    .custom-carousel {
+        max-height: 400px;
+        height: 400px;
+    }
+
+    .custom-carousel .carousel-inner,
+    .custom-carousel .carousel-item,
+    .custom-carousel .carousel-item img,
+    .custom-carousel .slide-content {
+        height: 100%;
+        max-height: 400px;
+    }
+
+    .carousel-caption h2 {
+        font-size: 1.25rem; 
+    }
+
+    .carousel-caption p {
+        font-size: 0.95rem; 
+    }  
+
+}
+
+@media (max-width: 576px) {
+    .custom-carousel {
+        max-height: 300px;
+        height: 300px;
+    }
+
+    .custom-carousel .carousel-inner,
+    .custom-carousel .carousel-item,
+    .custom-carousel .carousel-item img,
+    .custom-carousel .slide-content {
+        height: 100%;
+        max-height: 300px;
+    }
+}
+
+/* Reset any Bootstrap carousel positioning */
+.custom-carousel .carousel-inner {
+    position: relative;
+}
+
+/* Ensure slide content is properly centered */
+.carousel-item.active .slide-content {
+    z-index: 2;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.516);
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    color: aliceblue;
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    bottom: 0%;
+
+    /* Center content */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+}
+
+/* Ensure carousel items fill space and don't overlap */
+.custom-carousel .carousel-item {
+    min-height: 10vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Optional: if you add images later */
+.custom-carousel .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    z-index: 1;
+}
+
+/* Dissolve arrow background unless hovered */
+.custom-carousel .carousel-control-prev,
+.custom-carousel .carousel-control-next {
+    width: 40px; /* smaller width */
+    height: 40px;
+    padding: 2vw;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    opacity: 1;
+    transition: background-color 0.3s ease;
+    z-index: 2;
+}
+
+.custom-carousel .carousel-control-prev:hover,
+.custom-carousel .carousel-control-next:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+}
+
+.carousel-slide {
+    z-index: 1;
+}
+
+.carousel-slide .slide-content {
+    display: none;
+    z-index: 0;
+    background-color: transparent;
+}
+
+.carousel-item {
+    position: relative;
+}
+
+
+/* Bootstrap uses transform to slide items — this restores it */
+.custom-carousel .carousel-item-next,
+.custom-carousel .carousel-item-prev,
+.custom-carousel .carousel-item.active {
+    display: block !important;
+    transform: translateX(0);
+}
+
+.custom-carousel .carousel-item,
+.custom-carousel .carousel-item.active,
+.custom-carousel .carousel-item-next,
+.custom-carousel .carousel-item-prev {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-carousel .carousel-item {
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Slide in from right */
+.custom-carousel .carousel-item-next {
+    transform: translateX(0%);
+}
+
+/* Slide out to left */
+.custom-carousel .carousel-item-prev {
+    transform: translateX(100%);
+}

@@ -1,0 +1,143 @@
+.card-body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: transparent;
+    margin: 1vh 1vw;
+    z-index: 2;
+}
+
+.card-body .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.card-body .card-text {
+    flex-grow: 1;
+    color: #555;
+    text-align: center;
+}
+
+.card-footer {
+    text-align: center;
+    background: transparent;
+    border-top: none;
+}
+
+.card-image-overlay {
+    position: relative;
+    overflow: visible;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.card-image-overlay::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+}
+
+.card-image-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* Desktop: Image on left with variable width, consistent height */
+.image-container {
+  position: relative;
+  overflow: hidden;
+  background-color: #f8f9fa;
+  flex-shrink: 0;
+  min-width: 10vw;
+  max-width: 35vw;
+}
+
+.modal-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover !important;
+  object-position: center;
+}
+
+.modal-content-text {
+  line-height: 1.6;
+  font-size: 1rem;
+  overflow-y: auto;
+}
+
+.modal-content-text p {
+  margin-bottom: 1rem;
+}
+
+.modal-content-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* Custom modal sizing for desktop */
+
+.modal-content {
+  max-height: 85vh;
+}
+
+.modal-body {
+  max-height: calc(85vh - 140px); /* Account for header and footer */
+  overflow: hidden;
+}
+
+/* Tablet view - transition nicely */
+@media (max-width: 1199px) {
+  .image-container {
+    width: 40vw;
+    max-width: 400px;
+  }
+}
+
+/* Mobile: Image on top with consistent width, variable height */
+@media (max-width: 991px) {
+  .image-container {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    min-height: 280px;
+    max-height: 45vh;
+    height: 35vh;
+  }
+  
+  .modal-body {
+    flex-direction: column !important;
+    max-height: calc(85vh - 140px);
+    overflow-y: auto;
+  }
+}
+
+/* Very small mobile devices */
+@media (max-width: 576px) {
+  .image-container {
+    min-height: 240px;
+    max-height: 40vh;
+    height: 300px; /* Fixed height for small phones looks cleaner */
+  }
+  
+  .modal-dialog {
+    margin: 0.5rem;
+  }
+}
+
+/* Landscape mobile orientation */
+@media (max-width: 991px) and (orientation: landscape) {
+  .image-container {
+    height: 50vh; /* Reduce height in landscape mode */
+    max-height: 50vh;
+  }
+}
