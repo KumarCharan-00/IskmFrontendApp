@@ -32,7 +32,7 @@ function SiteNavbar() {
                 <Nav className="ms-auto align-items-lg-center gap-2">
                     <NavLink to="/" end className={linkClassNames} style={navBtnStyle}>Home</NavLink>
                     <NavLink to="/events" className={linkClassNames} style={navBtnStyle}>Events</NavLink>
-                    <NavLink to="/vaishnava-calendar" className={linkClassNames} style={navBtnStyle}>Vaishnava Calendar</NavLink>
+                    { /* <NavLink to="/vaishnava-calendar" className={linkClassNames} style={navBtnStyle}>Vaishnava Calendar</NavLink> */ }
                     <NavLink to="/about-us" className={linkClassNames} style={navBtnStyle}>About Us</NavLink>
                     <NavLink to="/donate" className={linkClassNames} style={navBtnStyle}>Donate</NavLink>
                 </Nav>

@@ -141,7 +141,7 @@ export const Section: React.FC<SectionProps> = (props) => {
                 { props.cards && props.cards.length > 0 && (loadCards) }
                 { props.bodyElement } 
                 { showSectionFooter && (
-                    <div className="section-footer pt-4">
+                    <div className="section-footer">
                         { props.linkHref && props.linkHref !== "#" && (
                             <a href={props.linkHref} className={`btn custom-link-btn-${colorS}`}>
                                 {props.linkText}
