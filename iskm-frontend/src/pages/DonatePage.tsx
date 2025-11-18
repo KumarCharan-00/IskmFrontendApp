@@ -23,6 +23,11 @@ interface FloatingFormType {
     color?: "blue" | "pink"
 }
 
+declare global {
+    interface Window {
+        Razorpay: any;
+    }
+}
 
 const FloatingForm: React.FC<FloatingFormType> = ({
     required = true,
@@ -54,6 +59,53 @@ const FloatingForm: React.FC<FloatingFormType> = ({
     );
 };
 
+const contactCards = [
+    {
+        title: "UPI Details",
+        previewText: (
+            <div className="mb-4">
+                <h6 className="text-primary">
+                    <i className="bi bi-bank me-2"></i> UPI IDs
+                </h6>
+                <div className="fw-bold">
+                    <div>iskmproddutur@ybl</div>
+                    <div>iskmproddutur@sbipay</div>
+                    <div>iskmproddutur@hdfcpay</div>
+                </div>
+            </div>
+        ),
+    },
+    {
+        title: "Bank Account Details",
+        previewText: (
+            <div className="mb-0">
+                <h6 className="text-primary">Bank Account Details</h6>
+                <p>
+                    <em>(Account details)</em>
+                </p>
+            </div>
+        ),
+    },
+];
+
+const cleanupRazorpay = (): void => {
+     // Remove Razorpay containers
+    const containers = document.querySelectorAll('.razorpay-container');
+    containers.forEach(container => container.remove());
+    
+    // Remove backdrop if any
+    const backdrop = document.querySelector('.razorpay-backdrop');
+    if (backdrop) {
+        backdrop.remove();
+    }
+
+    // Reset body styles
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+    document.body.style.position = '';
+    document.body.style.width = '';
+};
+
 function DonatePage() {
     const [ customAmount, setCustomAmount ] = useState(false);
     const [ showPaymentModal, setShowPaymentModal ] = useState(false);
@@ -75,36 +127,6 @@ function DonatePage() {
         email: "",
         amount: ""
     });
-
-
-    const contactCards = [
-        {
-            title: "UPI Details",
-            previewText: (
-                <div className="mb-4">
-                    <h6 className="text-primary">
-                        <i className="bi bi-bank me-2"></i> UPI IDs
-                    </h6>
-                    <div className="fw-bold">
-                        <div>iskmproddutur@ybl</div>
-                        <div>iskmproddutur@sbipay</div>
-                        <div>iskmproddutur@hdfcpay</div>
-                    </div>
-                </div>
-            ),
-        },
-        {
-            title: "Bank Account Details",
-            previewText: (
-                <div className="mb-0">
-                    <h6 className="text-primary">Bank Account Details</h6>
-                    <p>
-                        <em>(Account details)</em>
-                    </p>
-                </div>
-            ),
-        },
-    ];
 
     const CUSTOM_AMOUNT: string = "CUSTOM";
     const amountOptions: Array<string> = ["500", "1000", "2000", "5000", "CUSTOM"];
@@ -321,6 +343,7 @@ function DonatePage() {
         }
 
         setIsProcessing(true);
+        setShowPaymentModal(true);
 
         try {
             console.log("started API call")
@@ -347,10 +370,39 @@ function DonatePage() {
 
             console.log(paymentData);
 
-            // Redirect to payment gateway or show payment modal
-            setShowPaymentModal(true);
+            // Initialize Razorpay with the payment data
+            if (paymentData) {
+                const razorPayOptions = {
+                    ...paymentData,
+                    handler: function (response: any) {
+                        console.log("Payment Success:", response);
+                        cleanupRazorpay();
+                    },
+                    modal: {
+                        ondismiss: function() {
+                            console.log("Payment cancelled");
+                            // Force cleanup when modal closes
+                            cleanupRazorpay();
+                        },
+                        escape: true,
+                        backdropdismiss: true
+                    }
+                }
+                console.log(razorPayOptions);
+                const rzp1 = new window.Razorpay(razorPayOptions);
+
+                rzp1.on('payment.failed', function (response: any) {
+                    console.error('Payment failed:', response.error);
+                    cleanupRazorpay();
+                    alert('Payment failed. Please try again.');
+                });
+
+                setShowPaymentModal(false);
+                rzp1.open();
+            }
         } catch (error) {
             console.error("Donation error:", error);
+            cleanupRazorpay(); // Cleanup even on errors
             setErrorMessage("Failed to process donation. Please try again.");
         } finally {
             setIsProcessing(false);
