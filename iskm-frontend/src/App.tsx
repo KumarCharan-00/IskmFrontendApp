@@ -19,7 +19,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/events" element={<Events />} />
-          <Route path="/vaishnava-calendar" element={<VaishnavaCalendar />} />
+          { /* <Route path="/vaishnava-calendar" element={<VaishnavaCalendar />} /> */ }
+          { /* <Route path="" element={<Blogs />} /> */ }
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/donate" element={<DonatePage />} />
           <Route path="*" element={<Navigate to="/" replace />} />

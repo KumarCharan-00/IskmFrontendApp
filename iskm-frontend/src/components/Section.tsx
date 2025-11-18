@@ -124,9 +124,15 @@ export const Section: React.FC<SectionProps> = (props) => {
             break;
     }
 
+    const showSectionFooter: boolean = !!(
+        (props.linkHref && props.linkHref !== "#") 
+        || (props.donate && props.donateText) 
+        || props.footerElement
+    );
+
     return (
         <section className={getSectionClassName()} style={getSectionStyle()}>
-            <div className="section-container mt-2">
+            <div className="section-container">
                 <div className="section-header">
                     <h2 className="section-title">{props.title}</h2>
                     { props.subtitle && <p className="section-subtitle">{props.subtitle}</p> } 
@@ -134,19 +140,21 @@ export const Section: React.FC<SectionProps> = (props) => {
                 </div>
                 { props.cards && props.cards.length > 0 && (loadCards) }
                 { props.bodyElement } 
-                <div className="section-footer pb-4">
-                    { props.linkHref && props.linkHref !== "#" && (
-                        <a href={props.linkHref} className={`btn custom-link-btn-${colorS}`}>
-                            {props.linkText}
-                        </a> ) 
-                    }
-                    { props.donate && props.donateText && (
-                        <a href={'/donate'} className={`btn custom-btn-${colorP}`}>
-                            {props.donateText}
-                        </a>
-                    )}
-                    { props.footerElement }
-                </div>
+                { showSectionFooter && (
+                    <div className="section-footer pt-4">
+                        { props.linkHref && props.linkHref !== "#" && (
+                            <a href={props.linkHref} className={`btn custom-link-btn-${colorS}`}>
+                                {props.linkText}
+                            </a> ) 
+                        }
+                        { props.donate && props.donateText && (
+                            <a href={'/donate'} className={`btn custom-btn-${colorP}`}>
+                                {props.donateText}
+                            </a>
+                        )}
+                        { props.footerElement }
+                    </div>
+                ) }
             </div>
         </section>
     );

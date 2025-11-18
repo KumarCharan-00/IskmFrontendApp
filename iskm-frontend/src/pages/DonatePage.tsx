@@ -108,7 +108,6 @@ const cleanupRazorpay = (): void => {
 
 function DonatePage() {
     const [ customAmount, setCustomAmount ] = useState(false);
-    const [ showPaymentModal, setShowPaymentModal ] = useState(false);
     const [ isProcessing, setIsProcessing ] = useState(false);
     const [ errorMessage, setErrorMessage ] = useState("");
 
@@ -284,12 +283,22 @@ function DonatePage() {
                                 {amountOptions.map((amount) => (
                                     <Button
                                         key={amount}
-                                        variant={btnActiveState(amount) ? "primary": "outline-primary"}
-                                        className={`amount-btn flex-grow-1 ${btnActiveState(amount)? "amount-btn-active": ""}`}
+                                        variant={
+                                            btnActiveState(amount)
+                                                ? "primary"
+                                                : "outline-primary"
+                                        }
+                                        className={`amount-btn flex-grow-1 ${
+                                            btnActiveState(amount)
+                                                ? "amount-btn-active"
+                                                : ""
+                                        }`}
                                         onClick={() => handleAmount(amount)}
                                         type="button"
                                     >
-                                        {amount === CUSTOM_AMOUNT ? 'Enter Amount': '₹' + amount}
+                                        {amount === CUSTOM_AMOUNT
+                                            ? "Enter Amount"
+                                            : "₹" + amount}
                                     </Button>
                                 ))}
                             </div>
@@ -309,13 +318,25 @@ function DonatePage() {
                         type="submit"
                         className="w-100 custom-btn submit-btn donate-submit-btn mt-auto"
                         disabled={
-                            !paymentForm.amount || 
-                            parseInt(paymentForm.amount) < 100
+                            !paymentForm.amount ||
+                            parseInt(paymentForm.amount) < 100 ||
+                            isProcessing
                         }
                     >
-                        <span className="btn-text">
-                            Proceed to Pay ₹{paymentForm.amount}
-                        </span>
+                        {isProcessing ? (
+                            <>
+                                <span
+                                    className="spinner-border spinner-border-sm me-2"
+                                    role="status"
+                                    aria-hidden="true"
+                                ></span>
+                                Processing...
+                            </>
+                        ) : (
+                            <span className="btn-text">
+                                Proceed to Pay ₹{paymentForm.amount}
+                            </span>
+                        )}
                         <span className="btn-icon">→</span>
                     </Button>
                 </Form>
@@ -343,7 +364,6 @@ function DonatePage() {
         }
 
         setIsProcessing(true);
-        setShowPaymentModal(true);
 
         try {
             console.log("started API call")
@@ -397,7 +417,6 @@ function DonatePage() {
                     alert('Payment failed. Please try again.');
                 });
 
-                setShowPaymentModal(false);
                 rzp1.open();
             }
         } catch (error) {
@@ -410,31 +429,8 @@ function DonatePage() {
         }
     };
 
-    const redirectNotificationModal = (
-            <Modal
-                show={showPaymentModal}
-                onHide={() => setShowPaymentModal(false)}
-                centered={false}
-            >
-                <Modal.Header>
-                    <Modal.Title className="text-center">Payment Processing</Modal.Title>
-                </Modal.Header>
-                <Modal.Body className="text-center">
-                    <div className="mb-3">
-                        <i className="fas fa-spinner fa-spin fa-2x text-primary"></i>
-                    </div>
-                    <p>Redirecting to secure payment gateway...</p>
-                    <p className="text-muted small">
-                        Please do not close this window
-                    </p>
-                </Modal.Body>
-            </Modal>
-    );
-
     return (
         <div className="donate-page">
-            {redirectNotificationModal}
-            {/* Hero Section */}
             <Section
                 title="Support Our Mission"
                 subtitle="Join us in making a difference"
