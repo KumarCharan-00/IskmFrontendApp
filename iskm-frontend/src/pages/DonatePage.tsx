@@ -3,7 +3,6 @@ import {
     Container,
     Row,
     Col,
-    Modal,
     Form,
     Button,
     Card as BSCard,
@@ -15,12 +14,12 @@ interface FloatingFormType {
     type?: string;
     as?: "textarea" | "select";
     name: string;
-    val: string,
-    func: React.ChangeEventHandler,
-    className?: string,
-    labelVal: string,
-    required?: boolean,
-    color?: "blue" | "pink"
+    val: string;
+    func: React.ChangeEventHandler;
+    className?: string;
+    labelVal: string;
+    required?: boolean;
+    color?: "blue" | "pink";
 }
 
 declare global {
@@ -45,7 +44,7 @@ const FloatingForm: React.FC<FloatingFormType> = ({
         <Form.Floating className="mb-3">
             <Form.Control
                 id={id}
-                {...(as? {as}: {type})}
+                {...(as ? { as } : { type })}
                 name={props.name}
                 value={props.val}
                 onChange={props.func}
@@ -89,29 +88,29 @@ const contactCards = [
 ];
 
 const cleanupRazorpay = (): void => {
-     // Remove Razorpay containers
-    const containers = document.querySelectorAll('.razorpay-container');
-    containers.forEach(container => container.remove());
-    
+    // Remove Razorpay containers
+    const containers = document.querySelectorAll(".razorpay-container");
+    containers.forEach((container) => container.remove());
+
     // Remove backdrop if any
-    const backdrop = document.querySelector('.razorpay-backdrop');
+    const backdrop = document.querySelector(".razorpay-backdrop");
     if (backdrop) {
         backdrop.remove();
     }
 
     // Reset body styles
-    document.body.style.overflow = '';
-    document.body.style.paddingRight = '';
-    document.body.style.position = '';
-    document.body.style.width = '';
+    document.body.style.overflow = "";
+    document.body.style.paddingRight = "";
+    document.body.style.position = "";
+    document.body.style.width = "";
 };
 
 function DonatePage() {
-    const [ customAmount, setCustomAmount ] = useState(false);
-    const [ isProcessing, setIsProcessing ] = useState(false);
-    const [ errorMessage, setErrorMessage ] = useState("");
+    const [customAmount, setCustomAmount] = useState(false);
+    const [isProcessing, setIsProcessing] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
-        // Contact Form State
+    // Contact Form State
     const [contactForm, setContactForm] = useState({
         name: "",
         email: "",
@@ -124,11 +123,17 @@ function DonatePage() {
         name: "",
         phone: "",
         email: "",
-        amount: ""
+        amount: "",
     });
 
     const CUSTOM_AMOUNT: string = "CUSTOM";
-    const amountOptions: Array<string> = ["500", "1000", "2000", "5000", "CUSTOM"];
+    const amountOptions: Array<string> = [
+        "500",
+        "1000",
+        "2000",
+        "5000",
+        "CUSTOM",
+    ];
 
     const handleContactSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -166,7 +171,7 @@ function DonatePage() {
 
     const handleAmount = (amount: string) => {
         if (amount === CUSTOM_AMOUNT) {
-            paymentForm.amount = "100"; // Minimum Amount   
+            paymentForm.amount = "100"; // Minimum Amount
             setCustomAmount(true);
         } else {
             setPaymentForm({
@@ -175,11 +180,14 @@ function DonatePage() {
             });
             setCustomAmount(false);
         }
-    }
+    };
 
-    const btnActiveState = (amount: string) =>  {
-        return (paymentForm.amount === amount) || (amount === CUSTOM_AMOUNT && customAmount)
-    }
+    const btnActiveState = (amount: string) => {
+        return (
+            paymentForm.amount === amount ||
+            (amount === CUSTOM_AMOUNT && customAmount)
+        );
+    };
 
     const contactUsCard: ReactElement = (
         <BSCard className="h-100 shadow-lg get-in-touch border-0 d-flex flex-column">
@@ -196,7 +204,7 @@ function DonatePage() {
                 >
                     <div className="flex-grow-1">
                         <FloatingForm
-                            name="name" 
+                            name="name"
                             val={contactForm.name}
                             func={handleContactChange}
                             labelVal="Full Name"
@@ -347,11 +355,11 @@ function DonatePage() {
     const handleDonationSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setErrorMessage("");
-        console.log("Inside handleDonationSubmit")
+        console.log("Inside handleDonationSubmit");
 
         const amount = paymentForm.amount;
-        
-        console.log(amount)
+
+        console.log(amount);
 
         if (!amount || parseFloat(amount) <= 0) {
             setErrorMessage("Please select or enter a valid donation amount");
@@ -366,21 +374,24 @@ function DonatePage() {
         setIsProcessing(true);
 
         try {
-            console.log("started API call")
+            console.log("started API call");
             // Call your backend API to initiate payment
-            const response = await fetch("http://localhost:8080/generate-pay-req", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Access-Controle-Allow-Origin": "*"
-                },
-                body: JSON.stringify({
-                    name: paymentForm.name,
-                    amount: parseInt(amount),
-                    email: paymentForm.email,
-                    phone: paymentForm.phone
-                }),
-            });
+            const response = await fetch(
+                "http://localhost:8080/generate-pay-req",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Access-Controle-Allow-Origin": "*",
+                    },
+                    body: JSON.stringify({
+                        name: paymentForm.name,
+                        amount: parseInt(amount),
+                        email: paymentForm.email,
+                        phone: paymentForm.phone,
+                    }),
+                }
+            );
 
             if (!response.ok) {
                 throw new Error("Payment initiation failed");
@@ -399,22 +410,20 @@ function DonatePage() {
                         cleanupRazorpay();
                     },
                     modal: {
-                        ondismiss: function() {
+                        ondismiss: function () {
                             console.log("Payment cancelled");
                             // Force cleanup when modal closes
                             cleanupRazorpay();
                         },
-                        escape: true,
-                        backdropdismiss: true
-                    }
-                }
+                    },
+                };
                 console.log(razorPayOptions);
                 const rzp1 = new window.Razorpay(razorPayOptions);
 
-                rzp1.on('payment.failed', function (response: any) {
-                    console.error('Payment failed:', response.error);
+                rzp1.on("payment.failed", function (response: any) {
+                    console.error("Payment failed:", response.error);
                     cleanupRazorpay();
-                    alert('Payment failed. Please try again.');
+                    alert("Payment failed. Please try again.");
                 });
 
                 rzp1.open();

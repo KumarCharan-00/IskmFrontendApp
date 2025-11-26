@@ -69,7 +69,7 @@
   .donate-hero .hero-title {
     font-size: 2rem;
   }
-  
+
   .donate-hero .hero-subtitle {
     font-size: 1rem;
   }
@@ -82,12 +82,17 @@
   flex-direction: column;
   border-radius: 1rem;
   overflow: hidden;
+  background: linear-gradient(135deg, rgb(238, 95, 183, 0.005) 0%, rgb(238, 95, 183, 0.01) 100%);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .get-in-touch:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(238, 95, 183, 0.2) !important;
+}
+
+/* Form Body */
+.query-form-body {
+  padding: 2.5rem 2rem 2rem 2rem;
 }
 
 /* Contact Us Form Header */
@@ -105,13 +110,20 @@
   right: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
   animation: shimmer 3s infinite;
 }
 
 @keyframes shimmer {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(-20px, -20px); }
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(-20px, -20px);
+  }
 }
 
 .query-form-title h4 {
@@ -125,12 +137,6 @@
   position: relative;
   z-index: 1;
   font-size: 0.9rem;
-}
-
-/* Form Body */
-.query-form-body {
-  padding: 2.5rem 2rem 2rem 2rem;
-  background: linear-gradient(to bottom, #ffffff 0%, #fafafa 100%);
 }
 
 /* Submit Button */
@@ -161,7 +167,7 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   transition: left 0.5s ease;
 }
 
@@ -174,15 +180,15 @@
   .query-form-title {
     padding: 1.5rem 1.5rem 1.25rem 1.5rem;
   }
-  
+
   .query-form-title h4 {
     font-size: 1.25rem;
   }
-  
+
   .query-form-body {
     padding: 2rem 1.5rem 1.5rem 1.5rem;
   }
-  
+
   .form-input {
     font-size: 0.95rem;
   }
@@ -194,13 +200,13 @@
   display: flex;
   flex-direction: column;
   border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(75, 145, 226, 0.001) 0%, rgba(75, 145, 226, 0.01) 100%);
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .donate-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(74, 144, 226, 0.2) !important;
 }
 
 /* Donation Form Header */
@@ -218,7 +224,7 @@
   right: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
   animation: shimmer 3s infinite;
 }
 
@@ -238,7 +244,7 @@
 /* Form Body */
 .donate-form-body {
   padding: 2.5rem 2rem 2rem 2rem;
-  background: linear-gradient(to bottom, #ffffff 0%, #fafafa 100%);
+  background: transparent;
 }
 
 /* Donation Label */
@@ -303,6 +309,7 @@
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -330,15 +337,15 @@
   .donate-form-title {
     padding: 1.5rem 1.5rem 1.25rem 1.5rem;
   }
-  
+
   .donate-form-title h4 {
     font-size: 1.25rem;
   }
-  
+
   .donate-form-body {
     padding: 2rem 1.5rem 1.5rem 1.5rem;
   }
-  
+
   .amount-btn {
     font-size: 0.9rem;
     padding: 0.65rem 0.75rem;
@@ -370,48 +377,48 @@
 }
 
 .amount-buttons-container {
-    gap: 8px !important;
+  gap: 8px !important;
 }
 
 .amount-btn {
-    flex: 1 0 calc(25% - 8px);
-    min-width: 80px;
-    transition: all 0.3s ease;
-    border-radius: 12px;
-    padding: 10px 8px;
-    font-size: 0.9rem;
-    font-weight: 500;
+  flex: 1 0 calc(25% - 8px);
+  min-width: 80px;
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  padding: 10px 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
 .amount-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .amount-btn-active {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .amount-buttons-container {
-        gap: 6px !important;
-    }
-    
-    .amount-btn {
-        flex: 1 0 calc(50% - 6px);
-        min-width: 70px;
-        max-width: none;
-        font-size: 0.85rem;
-        padding: 8px 6px;
-    }
+  .amount-buttons-container {
+    gap: 6px !important;
+  }
+
+  .amount-btn {
+    flex: 1 0 calc(50% - 6px);
+    min-width: 70px;
+    max-width: none;
+    font-size: 0.85rem;
+    padding: 8px 6px;
+  }
 }
 
 @media (max-width: 480px) {
-    .amount-btn {
-        flex: 1 0 calc(50% - 4px);
-        min-width: 60px;
-        font-size: 0.8rem;
-        padding: 6px 4px;
-    }
+  .amount-btn {
+    flex: 1 0 calc(50% - 4px);
+    min-width: 60px;
+    font-size: 0.8rem;
+    padding: 6px 4px;
+  }
 }
