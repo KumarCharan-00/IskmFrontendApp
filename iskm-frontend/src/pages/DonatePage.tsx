@@ -114,7 +114,6 @@ function DonatePage() {
     const [contactForm, setContactForm] = useState({
         name: "",
         email: "",
-        phone: "",
         message: "",
     });
 
@@ -137,10 +136,20 @@ function DonatePage() {
 
     const handleContactSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // Handle contact form submission
-        console.log("Contact Form Submitted:", contactForm);
-        alert("Your query has been submitted. We'll get back to you soon!");
-        setContactForm({ name: "", email: "", phone: "", message: "" });
+
+        const { name, email, message } = contactForm;
+        const whatsappNumber = "918466024968";
+
+        const text = `  Name: ${name}
+                        Email: ${email}
+                        Query: ${message}`;
+
+        const encodedText = encodeURIComponent(text);
+        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedText}`;
+
+        window.open(whatsappUrl, "_blank");
+
+        setContactForm({ name: "", email: "", message: "" });
     };
 
     const handlePaymentSubmit = async (e: React.FormEvent) => {
@@ -215,13 +224,6 @@ function DonatePage() {
                             val={contactForm.email}
                             func={handleContactChange}
                             labelVal="Email Address"
-                        />
-                        <FloatingForm
-                            type="tel"
-                            name="phone"
-                            val={contactForm.phone}
-                            func={handleContactChange}
-                            labelVal="Phone Number"
                         />
                         <FloatingForm
                             as="textarea"
