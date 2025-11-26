@@ -38,28 +38,34 @@ const slides = [
 const activities = [
     {
         title: "Nitya Anna Prasadam Seva",
-        previewText: "Every single day, devotees and visitors receive free sanctified vegetarian meals (prasadam) prepared with great care and devotion.",
+        previewText:
+            "Every single day, devotees and visitors receive free sanctified vegetarian meals (prasadam) prepared with great care and devotion.",
         imageSrc: annadanamImage,
         imageAlt: "Nitya Anna Prasadam Seva",
         quote: "Distributing Krishna-prasadam is distributing mercy itself.",
-        fullText: "Every single day, devotees and visitors receive free sanctified vegetarian meals (prasadam) prepared with great care and devotion. Supporting this seva allows the temple to continue feeding hundreds daily — spreading Krishna’s compassion to every heart."
+        fullText:
+            "Every single day, devotees and visitors receive free sanctified vegetarian meals (prasadam) prepared with great care and devotion. Supporting this seva allows the temple to continue feeding hundreds daily — spreading Krishna’s compassion to every heart.",
     },
     {
         title: "Sunday Feast Seva",
-        previewText: "A weekly festival of devotion, kirtan, and prasadam. By sponsoring this feast, you help share the bliss of Krishna consciousness with devotees, guests, and newcomers every Sunday.",
+        previewText:
+            "A weekly festival of devotion, kirtan, and prasadam. By sponsoring this feast, you help share the bliss of Krishna consciousness with devotees, guests, and newcomers every Sunday.",
         imageSrc: aanadanamImage2,
         imageAlt: "Sunday Feast Seva",
         quote: "A weekly festival of devotion, kirtan, and prasadam.",
-        fullText: "The Sunday Feast Program is the most joyful day of the week at ISKM Proddatur — filled with melodious kirtan, inspiring discourses, and delicious prasadam. By sponsoring this feast, you help share the bliss of Krishna consciousness with devotees, guests, and newcomers every Sunday."
+        fullText:
+            "The Sunday Feast Program is the most joyful day of the week at ISKM Proddatur — filled with melodious kirtan, inspiring discourses, and delicious prasadam. By sponsoring this feast, you help share the bliss of Krishna consciousness with devotees, guests, and newcomers every Sunday.",
     },
     {
         title: "Youth Empowerment Seva",
-        previewText: "Empower young souls with Krishna consciousness. Through satsangs, retreats, and training sessions, we nurture spiritual values and devotion in young hearts.",
+        previewText:
+            "Empower young souls with Krishna consciousness. Through satsangs, retreats, and training sessions, we nurture spiritual values and devotion in young hearts.",
         imageSrc: youthLearningImage,
         imageAlt: "Youth Empowerment Seva",
         quote: "Empower young souls with Krishna consciousness.",
-        fullText: "Our Youth Empowerment Seva aims to guide students and young professionals to live a pure, purposeful, and Krishna-centered life. Through sanctified vegetarian meals, satsangs, retreats, and training sessions, we nurture spiritual values, discipline, and bhakti in young hearts — preparing them to lead meaningful lives rooted in devotion."
-    }
+        fullText:
+            "Our Youth Empowerment Seva aims to guide students and young professionals to live a pure, purposeful, and Krishna-centered life. Through sanctified vegetarian meals, satsangs, retreats, and training sessions, we nurture spiritual values, discipline, and bhakti in young hearts — preparing them to lead meaningful lives rooted in devotion.",
+    },
 ];
 
 const Carousal: React.FC = () => {

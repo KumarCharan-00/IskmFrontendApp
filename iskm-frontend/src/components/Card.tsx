@@ -29,9 +29,9 @@ const Card: React.FC<CardProps> = ({
     const handleCloseModal = () => {
         setShowModal(false);
     };
-    
-    const colorP = props.primaryColor ? props.primaryColor: "pink";
-    const colorS = props.secondaryColor ? props.secondaryColor: "blue";
+
+    const colorP = props.primaryColor ? props.primaryColor : "pink";
+    const colorS = props.secondaryColor ? props.secondaryColor : "blue";
 
     return (
         <>
@@ -49,15 +49,10 @@ const Card: React.FC<CardProps> = ({
                     <h5 className="card-title">{props.title}</h5>
                     <p className="card-text">{props.previewText}</p>
                 </div>
-                <div className="card-footer bg-none py-0 mb-3 mx-5 text-center">
-                    {linkHref && linkHref !== "#" && (
-                        <a href={linkHref} className="btn custom-btn card-link">
-                            {linkText}
-                        </a>
-                    )}
+                <div className="card-footer bg-none py-0 mb-4 mx-3 d-flex justify-content-center gap-1">
                     {props.fullText && (
                         <a
-                            className={`btn custom-link-btn-${colorP} card-full-content pt-0`}
+                            className={`btn custom-link-btn-${colorP} card-full-content`}
                             onClick={() => setShowModal(true)}
                         >
                             View More
@@ -91,7 +86,9 @@ const Card: React.FC<CardProps> = ({
                         {props.quote && (
                             <div className="text-start quote-bx quote-bx--pink color-white">
                                 <blockquote className="blockquote m-3">
-                                    <i className="mb-0 fw-regular">{props.quote}</i>
+                                    <i className="mb-0 fw-regular">
+                                        {props.quote}
+                                    </i>
                                 </blockquote>
                             </div>
                         )}
@@ -106,7 +103,7 @@ const Card: React.FC<CardProps> = ({
                 </Modal.Body>
                 <Modal.Footer>
                     <button
-                        className="btn btn-secondary"
+                        className={`btn custom-link-btn-${colorS}`}
                         onClick={handleCloseModal}
                     >
                         Close
@@ -114,7 +111,7 @@ const Card: React.FC<CardProps> = ({
                     {linkHref && linkHref !== "#" && (
                         <a
                             href={linkHref}
-                            className="btn custom-btn"
+                            className={`btn custom-btn-${colorP}`}
                             onClick={handleCloseModal}
                         >
                             {linkText}

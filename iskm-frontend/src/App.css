@@ -6,7 +6,8 @@ body {
   padding: 0;
 }
 
-#root, .App {
+#root,
+.App {
   width: 100%;
   margin: 0%;
 }
@@ -99,7 +100,7 @@ body {
   font-weight: 600;
   font-size: 1rem;
   letter-spacing: 0.5px;
-} 
+}
 
 .custom-link-btn-pink,
 .custom-link-btn-pink:active {
@@ -116,8 +117,7 @@ body {
   color: #345ea7;
 }
 
-.custom-link-btn:hover
-.custom-link-btn-blue:hover,
+.custom-link-btn:hover .custom-link-btn-blue:hover,
 .custom-link-btn-pink:hover,
 .custom-link-btn-white:hover {
   background: transparent;
@@ -137,8 +137,7 @@ body {
   color: #3d6ec2;
 }
 
-.custom-link-btn:active
-.custom-link-btn-blue:active,
+.custom-link-btn:active .custom-link-btn-blue:active,
 .custom-link-btn-pink:active,
 .custom-link-btn-white:active {
   transform: scale(1);
@@ -202,25 +201,25 @@ body {
 }
 
 /* Floating Labels */
-.form-floating > label {
+.form-floating>label {
   color: #6c757d;
   font-weight: 500;
   padding-left: 0.75rem;
 }
 
-.form-floating > .form-input:focus ~ label,
-.form-floating > .form-input:not(:placeholder-shown) ~ label {
+.form-floating>.form-input:focus~label,
+.form-floating>.form-input:not(:placeholder-shown)~label {
   transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
 }
 
-.form-floating > .form-input-pink:focus ~ label,
-.form-floating > .form-input-pink:not(:placeholder-shown) ~ label {
+.form-floating>.form-input-pink:focus~label,
+.form-floating>.form-input-pink:not(:placeholder-shown)~label {
   color: #ee5fb7;
   transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
 }
 
-.form-floating > .form-input-blue:focus ~ label,
-.form-floating > .form-input-blue:not(:placeholder-shown) ~ label {
+.form-floating>.form-input-blue:focus~label,
+.form-floating>.form-input-blue:not(:placeholder-shown)~label {
   color: #357abd;
   transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
 }

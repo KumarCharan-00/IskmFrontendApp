@@ -140,9 +140,7 @@ function DonatePage() {
         const { name, email, message } = contactForm;
         const whatsappNumber = "918466024968";
 
-        const text = `  Name: ${name}
-                        Email: ${email}
-                        Query: ${message}`;
+        const text = `Name: ${name} \nEmail: ${email} \nQuery: ${message}`;
 
         const encodedText = encodeURIComponent(text);
         const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedText}`;
@@ -231,7 +229,7 @@ function DonatePage() {
                             val={contactForm.message}
                             func={handleContactChange}
                             labelVal="Enter Your Query or Message"
-                            className="form-input message-input"
+                            className="form-input message-input query-input"
                         />
                     </div>
 

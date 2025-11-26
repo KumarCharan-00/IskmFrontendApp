@@ -90,6 +90,10 @@
   transform: translateY(-5px);
 }
 
+.form-floating>.query-input {
+  height: 10rem !important;
+}
+
 /* Form Body */
 .query-form-body {
   padding: 2.5rem 2rem 2rem 2rem;
