@@ -4,7 +4,6 @@ import annadanamImage from "../assets/images/annadanam.jpg";
 import youthLearningImage from "../assets/images/youthLearning.jpg";
 import aanadanamImage2 from "../assets/images/aanadanam2.jpg";
 import BhagavadGitaImage from "../assets/images/bhagavadGita.png";
-import BhagavadGitaImage2 from "../assets/images/BhagawadGita2.webp";
 import SPReading from "../assets/images/PrabhupadReading.webp";
 
 const events = [
