@@ -197,7 +197,10 @@ function DonatePage() {
     };
 
     const contactUsCard: ReactElement = (
-        <BSCard className="h-100 shadow-lg get-in-touch border-0 d-flex flex-column">
+        <BSCard
+            id="get-in-touch"
+            className="h-100 shadow-lg get-in-touch border-0 d-flex flex-column"
+        >
             <BSCard.Header className="query-form-title text-white border-0">
                 <h4 className="mb-0 fw-bold">Get in Touch</h4>
                 <p className="mb-0 mt-1 small opacity-90">
@@ -246,7 +249,10 @@ function DonatePage() {
     );
 
     const donateUsCard: ReactElement = (
-        <BSCard className="h-100 shadow-lg donate-card border-0 d-flex flex-column">
+        <BSCard
+            id="donate-card"
+            className="h-100 shadow-lg donate-card border-0 d-flex flex-column"
+        >
             <BSCard.Header className="donate-form-title text-white border-0">
                 <h4 className="mb-0 fw-bold">Make a Donation</h4>
                 <p className="mb-0 mt-1 small opacity-90">
@@ -479,7 +485,8 @@ function DonatePage() {
                 title="Get in Touch & Support Our Mission"
                 subtitle="Contact us for queries or make a donation to support our spiritual activities"
                 backgroundType="white"
-                className="forms-section"
+                className="seva-section"
+                id="seva-options"
                 type="TextOnly"
                 bodyElement={
                     <Container fluid className="py-4">

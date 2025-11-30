@@ -16,7 +16,7 @@ const events = [
         quote: "Distributing Krishna-prasadam is distributing mercy itself.",
         fullText:
             "Every single day, devotees and visitors receive free sanctified vegetarian meals (prasadam) prepared with great care and devotion. Supporting this seva allows the temple to continue feeding hundreds daily — spreading Krishna’s compassion to every heart.",
-        linkHref: "/donate",
+        linkHref: "/donate#seva-options",
         linkText: "Support Us",
     },
     {
@@ -28,7 +28,7 @@ const events = [
         quote: "A weekly festival of devotion, kirtan, and prasadam.",
         fullText:
             "The Sunday Feast Program is the most joyful day of the week at ISKM Proddatur — filled with melodious kirtan, inspiring discourses, and delicious prasadam. By sponsoring this feast, you help share the bliss of Krishna consciousness with devotees, guests, and newcomers every Sunday.",
-        linkHref: "/donate",
+        linkHref: "/donate#seva-options",
         linkText: "Support Us",
     },
     {
@@ -40,7 +40,7 @@ const events = [
         quote: "Empower young souls with Krishna consciousness.",
         fullText:
             "Our Youth Empowerment Seva aims to guide students and young professionals to live a pure, purposeful, and Krishna-centered life. Through sanctified vegetarian meals, satsangs, retreats, and training sessions, we nurture spiritual values, discipline, and bhakti in young hearts — preparing them to lead meaningful lives rooted in devotion.",
-        linkHref: "/donate",
+        linkHref: "/donate#seva-options",
         linkText: "Support Us",
     },
     {
@@ -52,7 +52,7 @@ const events = [
         quote: "`There is no servant in this world more dear to Me than he, nor will there ever be one more dear.` — Bhagavad-gītā 18.68",
         fullText:
             "Distributing Srila Prabhupada’s books is the highest form of compassion — illuminating lives with divine knowledge. Your contribution helps print, store, and distribute these transcendental literatures to eager students, families, and seekers who may otherwise not afford them.",
-        linkHref: "/donate",
+        linkHref: "/donate#seva-options",
         linkText: "Support Us",
     },
     {
@@ -64,7 +64,7 @@ const events = [
         quote: `One who offers the Deity gifts of land, markets, cities and villages so that the regular daily worship and special festivals of the Deity may go on continually will achieve opulence equal to My own. By installing the Deity of the Lord one becomes king of the entire earth, by building a temple for the Lord one becomes ruler of the three worlds, by worshiping and serving the Deity one goes to the planet of Lord Brahmā, and by performing all three of these activities one achieves a transcendental form like My own. — Śrīmad-Bhāgavatam 11.27.51–52`,
         fullText:
             "The ISKM Proddatur Temple Project is a divine mission to expand and beautify the Lord’s home — including altar development, deity paraphernalia, guest facilities, and temple infrastructure. Every brick offered with devotion builds not only Krishna’s temple but also the foundation of your own spiritual progress.",
-        linkHref: "/donate",
+        linkHref: "/donate#seva-options",
         linkText: "Support Us",
     },
 ];
@@ -178,7 +178,7 @@ function Events() {
                 }
                 donate={false}
                 donateText="Support and Seva Donation"
-                linkHref="/donate"
+                linkHref="/donate#seva-options"
                 linkText="Support Our Mission"
             />
         </div>

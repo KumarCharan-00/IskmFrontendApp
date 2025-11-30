@@ -9,9 +9,12 @@ import DonatePage from "./pages/DonatePage";
 import "./assets/css/common.css";
 import "./App.css";
 
+import ScrollToTop from "./components/ScrollToTop";
+
 function App() {
     return (
         <div className="App container">
+            <ScrollToTop />
             <SiteNavbar />
             <div className="d-flex flex-column align-items-center min-vh-100">
                 <Container className="body-container flex-grow-1">

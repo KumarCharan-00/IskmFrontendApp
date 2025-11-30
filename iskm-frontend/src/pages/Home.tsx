@@ -30,7 +30,7 @@ const slides = [
         description:
             "Your donations help us continue our work and serve the community.",
         imageSrc: c3,
-        buttonHref: "/donate",
+        buttonHref: "/donate#seva-options",
         buttonText: "Support Us",
     },
 ];
@@ -143,7 +143,7 @@ export default function Home() {
                 showLink={false}
                 donate={true}
                 donateText="Support Us"
-                linkHref="/donate#seva-donation"
+                linkHref="/donate#get-in-touch"
                 linkText="Join Seva Programs"
                 type="TextOnly"
                 bodyElement={
