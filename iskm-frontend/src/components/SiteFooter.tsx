@@ -46,25 +46,27 @@ function SiteFooter() {
                             <NavLink to="/events" className="medium color-blue">
                                 Events
                             </NavLink>
-                            <NavLink
+                            {/*<NavLink
                                 to="/vaishnava-calendar"
                                 className="medium color-blue"
-                            >
                                 Vaishnava Calendar
-                            </NavLink>
+                            </NavLink> */}
                             <NavLink
                                 to="/about-us"
                                 className="medium color-blue"
                             >
                                 About Us
                             </NavLink>
-                            <a href="#contact" className="medium color-blue">
+                            <NavLink
+                                to="/donate#get-in-touch"
+                                className="medium color-blue"
+                            >
                                 Contact Us
-                            </a>
+                            </NavLink>
                         </nav>
 
                         <NavLink
-                            to="/donate"
+                            to="/donate#seva-options"
                             className="btn mb-5 custom-btn-pink"
                         >
                             Make a Donation
@@ -83,9 +85,9 @@ function SiteFooter() {
                             >
                                 <FaInstagram />
                             </SocialIcon>
-                            <SocialIcon href="#" label="X">
+                            {/* <SocialIcon href="#" label="X">
                                 <FaTwitter />
-                            </SocialIcon>
+                            </SocialIcon> */}
                             <SocialIcon
                                 href="https://youtube.com/@ISKMProddatur"
                                 label="YouTube"

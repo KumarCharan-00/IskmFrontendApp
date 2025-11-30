@@ -236,7 +236,7 @@ body {
   border-color: #dc3545;
 }
 
-.form-control:valid:not(:placeholder-shown) {
+.form-control:valid:not(:placeholder-shown):not(.is-invalid) {
   border-color: #28a745;
 }
 

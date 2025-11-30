@@ -20,6 +20,7 @@ interface FloatingFormType {
     labelVal: string;
     required?: boolean;
     color?: "blue" | "pink";
+    error?: string;
 }
 
 declare global {
@@ -34,6 +35,7 @@ const FloatingForm: React.FC<FloatingFormType> = ({
     type = "text",
     color = "pink",
     as,
+    error,
     ...props
 }): ReactElement => {
     if (className.includes("form-input")) {
@@ -52,8 +54,12 @@ const FloatingForm: React.FC<FloatingFormType> = ({
                 placeholder=" "
                 className={className}
                 autoComplete={props.name}
+                isInvalid={!!error}
             />
             <Form.Label htmlFor={id}>{props.labelVal}</Form.Label>
+            <Form.Control.Feedback type="invalid">
+                {error}
+            </Form.Control.Feedback>
         </Form.Floating>
     );
 };
@@ -116,9 +122,19 @@ function DonatePage() {
         email: "",
         message: "",
     });
+    const [contactErrors, setContactErrors] = useState({
+        name: "",
+        email: "",
+    });
 
     // Payment Form State
     const [paymentForm, setPaymentForm] = useState({
+        name: "",
+        phone: "",
+        email: "",
+        amount: "",
+    });
+    const [paymentErrors, setPaymentErrors] = useState({
         name: "",
         phone: "",
         email: "",
@@ -134,11 +150,44 @@ function DonatePage() {
         "CUSTOM",
     ];
 
+    const validateName = (name: string) => {
+        const regex = /^[a-zA-Z\s.]*$/;
+        return regex.test(name)
+            ? ""
+            : "Name should only contain letters or dots";
+    };
+
+    const validateEmail = (email: string) => {
+        const regex = /^[a-zA-Z+.]+@[a-zA-Z]{2,}\.[a-zA-Z]{2,}$/;
+        return regex.test(email) ? "" : "Invalid email format";
+    };
+
+    const validatePhone = (phone: string) => {
+        const regex = /^\d*$/;
+        return regex.test(phone)
+            ? ""
+            : "Mobile number should only contain digits";
+    };
+
+    const validateAmountVal = (amount: string) => {
+        const regex = /^\d*$/;
+        return regex.test(amount) ? "" : "Amount must be a positive number";
+    };
+
     const handleContactSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
         const { name, email, message } = contactForm;
-        const whatsappNumber = "918466024968";
+
+        const nameError = validateName(name);
+        const emailError = validateEmail(email);
+
+        if (nameError || emailError) {
+            setContactErrors({ name: nameError, email: emailError });
+            return;
+        }
+
+        const whatsappNumber = "916281469214";
 
         const text = `Name: ${name} \nEmail: ${email} \nQuery: ${message}`;
 
@@ -148,10 +197,28 @@ function DonatePage() {
         window.open(whatsappUrl, "_blank");
 
         setContactForm({ name: "", email: "", message: "" });
+        setContactErrors({ name: "", email: "" });
     };
 
     const handlePaymentSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        const { name, phone, email, amount } = paymentForm;
+
+        const nameError = validateName(name);
+        const phoneError = validatePhone(phone);
+        const emailError = validateEmail(email);
+        const amountError = validateAmountVal(amount);
+
+        if (nameError || phoneError || emailError || amountError) {
+            setPaymentErrors({
+                name: nameError,
+                phone: phoneError,
+                email: emailError,
+                amount: amountError,
+            });
+            return;
+        }
 
         console.log("Payment Form Submitted:", {
             ...paymentForm,
@@ -163,16 +230,36 @@ function DonatePage() {
     const handleContactChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
+        const { name, value } = e.target;
+        let error = "";
+        if (name === "name") error = validateName(value);
+        if (name === "email") error = validateEmail(value);
+
         setContactForm({
             ...contactForm,
-            [e.target.name]: e.target.value,
+            [name]: value,
+        });
+        setContactErrors({
+            ...contactErrors,
+            [name]: error,
         });
     };
 
     const handlePaymentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        let error = "";
+        if (name === "name") error = validateName(value);
+        if (name === "phone") error = validatePhone(value);
+        if (name === "email") error = validateEmail(value);
+        if (name === "amount") error = validateAmountVal(value);
+
         setPaymentForm({
             ...paymentForm,
-            [e.target.name]: e.target.value,
+            [name]: value,
+        });
+        setPaymentErrors({
+            ...paymentErrors,
+            [name]: error,
         });
     };
 
@@ -180,12 +267,14 @@ function DonatePage() {
         if (amount === CUSTOM_AMOUNT) {
             paymentForm.amount = "100"; // Minimum Amount
             setCustomAmount(true);
+            setPaymentErrors({ ...paymentErrors, amount: "" });
         } else {
             setPaymentForm({
                 ...paymentForm,
                 amount: amount,
             });
             setCustomAmount(false);
+            setPaymentErrors({ ...paymentErrors, amount: "" });
         }
     };
 
@@ -218,6 +307,7 @@ function DonatePage() {
                             val={contactForm.name}
                             func={handleContactChange}
                             labelVal="Full Name"
+                            error={contactErrors.name}
                         />
                         <FloatingForm
                             type="email"
@@ -225,6 +315,7 @@ function DonatePage() {
                             val={contactForm.email}
                             func={handleContactChange}
                             labelVal="Email Address"
+                            error={contactErrors.email}
                         />
                         <FloatingForm
                             as="textarea"
@@ -271,6 +362,7 @@ function DonatePage() {
                             func={handlePaymentChange}
                             labelVal="Full Name"
                             color="blue"
+                            error={paymentErrors.name}
                         />
                         <FloatingForm
                             type="tel"
@@ -279,6 +371,7 @@ function DonatePage() {
                             func={handlePaymentChange}
                             labelVal="Mobile Number"
                             color="blue"
+                            error={paymentErrors.phone}
                         />
                         <FloatingForm
                             type="email"
@@ -287,6 +380,7 @@ function DonatePage() {
                             func={handlePaymentChange}
                             labelVal="Email"
                             color="blue"
+                            error={paymentErrors.email}
                         />
 
                         <Form.Group className="mb-3">
@@ -323,6 +417,7 @@ function DonatePage() {
                                     val={paymentForm.amount}
                                     func={handlePaymentChange}
                                     labelVal="Amount in Rupees (INR)"
+                                    error={paymentErrors.amount}
                                 />
                             )}
                         </Form.Group>
@@ -441,6 +536,7 @@ function DonatePage() {
         } finally {
             setIsProcessing(false);
             setPaymentForm({ name: "", phone: "", email: "", amount: "" });
+            setPaymentErrors({ name: "", phone: "", email: "", amount: "" });
         }
     };
 
