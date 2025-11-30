@@ -77,7 +77,7 @@ const Carousal: React.FC = () => {
                 indicators={true}
                 className="custom-carousel bg-white rounded shadow-sm position-relative "
                 slide={true}
-                fade={true}
+                fade={false}
                 pause={false}
             >
                 {slides.map((slide, index) => (
@@ -97,7 +97,7 @@ const Carousal: React.FC = () => {
                                 {slide.buttonText && (
                                     <Link
                                         to={slide.buttonHref}
-                                        className="btn custom-btn"
+                                        className="btn custom-btn-pink blur"
                                     >
                                         {slide.buttonText}
                                     </Link>
