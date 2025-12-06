@@ -23,6 +23,8 @@ interface SectionProps {
     bodyElement?: ReactNode;
     footerElement?: ReactNode;
     id?: string;
+    startDate?: string;
+    endDate?: string;
 }
 
 // background color -> [primary btn/link color, secondary link/btn color]
@@ -77,6 +79,8 @@ export const Section: React.FC<SectionProps> = (props) => {
                         fullText={card.fullText}
                         primaryColor={colorP}
                         secondaryColor={colorS}
+                        startDate={card.startDate}
+                        endDate={card.endDate}
                     />
                 ))}
         </div>

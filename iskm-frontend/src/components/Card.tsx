@@ -13,6 +13,8 @@ export interface CardProps {
     linkHref?: string;
     primaryColor?: "pink" | "blue" | "white";
     secondaryColor?: "pink" | "blue" | "white";
+    startDate?: string;
+    endDate?: string;
 }
 
 const Card: React.FC<CardProps> = ({
@@ -45,8 +47,36 @@ const Card: React.FC<CardProps> = ({
                         />
                     </div>
                 )}
-                <div className="card-body">
+                <div className="d-flex flex-column justify-content-between card-body">
                     <h5 className="card-title">{props.title}</h5>
+                    {(props.startDate || props.endDate) && (
+                        <div className="d-flex flex-wrap align-items-center justify-content-center mb-0">
+                            <div className="gap-2 d-flex align-items-center">
+                                <span className={`date-label color-${colorS}`}>
+                                    FROM
+                                </span>
+                                {props.startDate && (
+                                    <span
+                                        className={`festival-date festival-date--start color-${colorP}`}
+                                    >
+                                        {props.startDate}
+                                    </span>
+                                )}
+                            </div>
+                            <div className="gap-2 d-flex align-items-center">
+                                <span className={`date-label color-${colorS}`}>
+                                    UNTIL
+                                </span>
+                                {props.endDate && (
+                                    <span
+                                        className={`festival-date festival-date--end date-value color-${colorP}`}
+                                    >
+                                        {props.endDate}
+                                    </span>
+                                )}
+                            </div>
+                        </div>
+                    )}
                     <p className="card-text">{props.previewText}</p>
                 </div>
                 <div className="card-footer bg-none py-0 mb-4 mx-3 d-flex justify-content-center gap-1">
@@ -83,6 +113,26 @@ const Card: React.FC<CardProps> = ({
                         </div>
                     )}
                     <div className="p-4 flex-grow-1 d-inline-flex flex-column gap-3">
+                        {(props.startDate || props.endDate) && (
+                            <div className="d-flex flex-wrap align-items-center justify-content-start gap-2 mb-0">
+                                <span className="date-label">From</span>
+                                {props.startDate && (
+                                    <span
+                                        className={`festival-date festival-date--start color-${colorS}`}
+                                    >
+                                        {props.startDate}
+                                    </span>
+                                )}
+                                <span className="date-label">to</span>
+                                {props.endDate && (
+                                    <span
+                                        className={`festival-date festival-date--end date-value color-${colorS}`}
+                                    >
+                                        {props.endDate}
+                                    </span>
+                                )}
+                            </div>
+                        )}
                         {props.quote && (
                             <div className="text-start quote-bx quote-bx--pink color-white">
                                 <blockquote className="blockquote m-3">
