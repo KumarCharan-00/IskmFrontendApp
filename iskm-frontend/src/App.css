@@ -39,6 +39,22 @@ body {
   color: #ee5fb7 !important;
 }
 
+.color-white {
+  color: white !important;
+}
+
+.bg-color-pink {
+  background-color: #ee5fb7 !important;
+}
+
+.bg-color-blue {
+  background-color: rgb(52, 94, 167, 0.05) !important;
+}
+
+.bg-color-white {
+  background-color: white !important;
+}
+
 .custom-btn,
 .custom-btn-blue,
 .custom-btn-pink {

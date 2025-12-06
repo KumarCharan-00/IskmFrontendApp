@@ -97,11 +97,11 @@
 
 /* Responsive Design */
 
-@media (max-width: 768px) {  
+@media (max-width: 768px) {
   .activity-icon {
     font-size: 2.5rem;
   }
-  
+
   .activity-title {
     font-size: 1.1rem;
   }
@@ -112,4 +112,3 @@
     font-size: 2rem;
   }
 }
-
