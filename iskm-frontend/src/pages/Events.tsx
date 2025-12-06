@@ -5,6 +5,8 @@ import youthLearningImage from "../assets/images/youthLearning.jpg";
 import aanadanamImage2 from "../assets/images/aanadanam2.jpg";
 import BhagavadGitaImage from "../assets/images/BhagavadGita.png";
 import SPReading from "../assets/images/PrabhupadReading.webp";
+import { useEffect, useState } from "react";
+import { fetchPublicContent, getImageSrc } from "../services/contentService";
 
 const events = [
     {
@@ -117,6 +119,51 @@ const activitiesCards = [
 ];
 
 function Events() {
+    const [sevaEvents, setSevaEvents] = useState(events);
+    const [festivalEvents, setFestivalEvents] = useState<any[]>([]);
+
+    useEffect(() => {
+        const loadContent = async () => {
+            const data = await fetchPublicContent(["SEVA", "FESTIVAL"]);
+            console.log(data);
+            if (data && data.length > 0) {
+                const sevas = data
+                    .filter((item) => item.type === "SEVA")
+                    .map((item) => ({
+                        title: item.title,
+                        previewText: item.previewText || "",
+                        fullText: item.fullText || "",
+                        quote: item.quote || "",
+                        imageSrc: getImageSrc(item.images?.[0]) || "",
+                        imageAlt: item.title,
+                        linkHref: "/donate#seva-options",
+                        linkText: "Support Us",
+                        startDate: item.showFromDate,
+                        endDate: item.showToDate,
+                    }));
+
+                const festivals = data
+                    .filter((item) => item.type === "FESTIVAL")
+                    .map((item) => ({
+                        title: item.title,
+                        previewText: item.previewText || "",
+                        fullText: item.fullText || "",
+                        quote: item.quote || "",
+                        imageSrc: getImageSrc(item.images?.[0]) || "",
+                        imageAlt: item.title,
+                        linkHref: "/donate#seva-options",
+                        linkText: "Support Us",
+                        startDate: item.showFromDate,
+                        endDate: item.showToDate,
+                    }));
+
+                setSevaEvents(sevas.length > 0 ? sevas : events);
+                setFestivalEvents(festivals);
+            }
+        };
+        loadContent();
+    }, []);
+
     return (
         <div className="events-page">
             {/* Programs & Activities Section */}
@@ -130,13 +177,26 @@ function Events() {
                 type="Bootstrap"
             />
 
+            {/* Festivals Section */}
+            {festivalEvents.length > 0 && (
+                <Section
+                    title="Festivals"
+                    subtitle="Join us in celebrating our major festivals with devotion and joy"
+                    cards={festivalEvents}
+                    backgroundType="white"
+                    className="festivals-section"
+                    showLink={false}
+                    type="Custom"
+                />
+            )}
+
             {/* Sevas Section */}
             <Section
                 title="Our Divine Sevas"
                 subtitle="Participate in these sacred services and receive the blessings of the Lord"
-                cards={events}
-                backgroundType="white"
-                className="events-section mt-0"
+                cards={sevaEvents}
+                backgroundType="pink"
+                className="events-section mt-0 mb-0"
                 showLink={false}
                 type="Custom"
             />
@@ -156,7 +216,7 @@ function Events() {
                     </em>
                 }
                 backgroundType="blue"
-                className="events-donate-section mb-0 pb-0"
+                className="events-donate-section my-0 py-0"
                 showLink={false}
                 type="TextOnly"
                 bodyElement={

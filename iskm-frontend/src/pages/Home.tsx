@@ -9,6 +9,8 @@ import annadanamImage from "../assets/images/annadanam.jpg";
 import youthLearningImage from "../assets/images/youthLearning.jpg";
 import aanadanamImage2 from "../assets/images/aanadanam2.jpg";
 import { Card } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { fetchPublicContent, getImageSrc } from "../services/contentService";
 
 const slides = [
     {
@@ -129,6 +131,48 @@ export default function Home() {
         },
     ];
 
+    const [sevaEvents, setSevaEvents] = useState(activities);
+    const [festivalEvents, setFestivalEvents] = useState<any[]>([]);
+
+    useEffect(() => {
+        const loadContent = async () => {
+            const data = await fetchPublicContent(["SEVA", "FESTIVAL"], 3);
+            if (data && data.length > 0) {
+                const sevas = data
+                    .filter((item) => item.type === "SEVA")
+                    .map((item) => ({
+                        title: item.title,
+                        previewText: item.previewText || "",
+                        fullText: item.fullText || "",
+                        quote: item.quote || "",
+                        imageSrc: getImageSrc(item.images?.[0]) || "",
+                        imageAlt: item.title,
+                        linkHref: "/events",
+                        linkText: "View All Sevas",
+                    }));
+
+                const festivals = data
+                    .filter((item) => item.type === "FESTIVAL")
+                    .map((item) => ({
+                        title: item.title,
+                        previewText: item.previewText || "",
+                        fullText: item.fullText || "",
+                        quote: item.quote || "",
+                        imageSrc: getImageSrc(item.images?.[0]) || "",
+                        imageAlt: item.title,
+                        linkHref: "/events",
+                        linkText: "View All Festivals",
+                        startDate: item.showFromDate,
+                        endDate: item.showToDate,
+                    }));
+
+                setSevaEvents(sevas ? sevas : activities);
+                setFestivalEvents(festivals);
+            }
+        };
+        loadContent();
+    }, []);
+
     return (
         <div>
             <Carousal />
@@ -160,11 +204,28 @@ export default function Home() {
                 }
             />
 
+            {/* Festival Preview Section */}
+            {festivalEvents.length > 0 && (
+                <Section
+                    title="Upcoming Festivals"
+                    subtitle="Join us in celebrating our major festivals with devotion and joy."
+                    cards={festivalEvents}
+                    backgroundType="pink"
+                    className="festivals-section"
+                    showLink={false}
+                    linkHref="/events"
+                    linkText="View All Festivals"
+                    donate={true}
+                    donateText="Donate for Festival"
+                    type="Custom"
+                />
+            )}
+
             {/* Activities Preview Section */}
             <Section
                 title="Seva Programs"
                 subtitle="Discover the various activities we offer to engage with our community."
-                cards={activities}
+                cards={sevaEvents}
                 backgroundType="white"
                 className="events-section"
                 showLink={false}
