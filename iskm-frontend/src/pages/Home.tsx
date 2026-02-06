@@ -177,6 +177,23 @@ export default function Home() {
         <div>
             <Carousal />
 
+            {/* Festival Preview Section */}
+            {festivalEvents.length > 0 && (
+                <Section
+                    title="Upcoming Festivals"
+                    subtitle="Join us in celebrating our major festivals with devotion and joy."
+                    cards={festivalEvents}
+                    backgroundType="white"
+                    className="festivals-section"
+                    showLink={false}
+                    linkHref="/events"
+                    linkText="View All Festivals"
+                    donate={true}
+                    donateText="Donate for Festival"
+                    type="Custom"
+                />
+            )}
+
             {/* Custom Donation Section */}
             <Section
                 title="Support Our Mission"
@@ -205,23 +222,6 @@ export default function Home() {
                     </div>
                 }
             />
-
-            {/* Festival Preview Section */}
-            {festivalEvents.length > 0 && (
-                <Section
-                    title="Upcoming Festivals"
-                    subtitle="Join us in celebrating our major festivals with devotion and joy."
-                    cards={festivalEvents}
-                    backgroundType="pink"
-                    className="festivals-section"
-                    showLink={false}
-                    linkHref="/events"
-                    linkText="View All Festivals"
-                    donate={true}
-                    donateText="Donate for Festival"
-                    type="Custom"
-                />
-            )}
 
             {/* Activities Preview Section */}
             <Section
