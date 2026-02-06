@@ -31,6 +31,14 @@ body {
   transition: all ease 0.25s;
 }
 
+.t-justify {
+  text-align: justify !important;
+}
+
+.t-center {
+  text-align: center !important;
+}
+
 .color-blue {
   color: #2968a8 !important;
 }

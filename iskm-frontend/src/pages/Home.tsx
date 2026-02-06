@@ -193,10 +193,12 @@ export default function Home() {
                 bodyElement={
                     <div className="donation-cards-container">
                         {donationContent.map((item, index) => (
-                            <Card key={index} className="donation-card mb-3">
+                            <Card key={index} className="donation-card">
                                 <Card.Body>
                                     <Card.Title>{item.title}</Card.Title>
-                                    <Card.Text>{item.text}</Card.Text>
+                                    <Card.Text className="t-center">
+                                        {item.text}
+                                    </Card.Text>
                                 </Card.Body>
                             </Card>
                         ))}
