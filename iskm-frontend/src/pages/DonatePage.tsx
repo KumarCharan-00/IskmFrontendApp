@@ -478,7 +478,7 @@ function DonatePage() {
             console.log("started API call");
             // Call your backend API to initiate payment
             const response = await fetch(
-                `${import.meta.env.VITE_API_BASE_URL}/api/generate-pay-req`,
+                `${import.meta.env.VITE_API_BASE_URL}/api/pay-req`,
                 {
                     method: "POST",
                     headers: {
