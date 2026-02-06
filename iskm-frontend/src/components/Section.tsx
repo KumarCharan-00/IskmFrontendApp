@@ -58,7 +58,7 @@ export const Section: React.FC<SectionProps> = (props) => {
     };
 
     const btnLinkColors: Array<color> = colorCombos.get(
-        props.backgroundType ?? "pink"
+        props.backgroundType ?? "pink",
     ) ?? ["pink", "blue"];
     const colorP: color = btnLinkColors[0];
     const colorS: color = btnLinkColors[1];
