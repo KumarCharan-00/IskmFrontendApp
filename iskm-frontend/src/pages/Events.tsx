@@ -164,6 +164,11 @@ function Events() {
         loadContent();
     }, []);
 
+    let index = 0;
+    const alternateColors = (index: number) => {
+        return index % 2 === 0 ? "pink" : "white";
+    };
+
     return (
         <div className="events-page">
             {/* Programs & Activities Section */}
@@ -171,7 +176,7 @@ function Events() {
                 title="Programs & Activities"
                 subtitle="At ISKM Proddatur, we joyfully engage in various devotional activities to serve the community and spread Krishna consciousness."
                 cards={activitiesCards}
-                backgroundType="pink"
+                backgroundType={alternateColors(index++)}
                 className="activities-section mt-0"
                 showLink={false}
                 type="Bootstrap"
@@ -183,7 +188,7 @@ function Events() {
                     title="Festivals"
                     subtitle="Join us in celebrating our major festivals with devotion and joy"
                     cards={festivalEvents}
-                    backgroundType="white"
+                    backgroundType={alternateColors(index++)}
                     className="festivals-section"
                     showLink={false}
                     type="Custom"
@@ -195,7 +200,7 @@ function Events() {
                 title="Our Divine Sevas"
                 subtitle="Participate in these sacred services and receive the blessings of the Lord"
                 cards={sevaEvents}
-                backgroundType="pink"
+                backgroundType={alternateColors(index++)}
                 className="events-section mt-0 mb-0"
                 showLink={false}
                 type="Custom"
@@ -216,7 +221,7 @@ function Events() {
                     </em>
                 }
                 backgroundType="blue"
-                className="events-donate-section my-0 py-0"
+                className="events-donate-section my-0"
                 showLink={false}
                 type="TextOnly"
                 bodyElement={
