@@ -228,7 +228,7 @@ function DonatePage() {
     };
 
     const handleContactChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => {
         const { name, value } = e.target;
         let error = "";
@@ -351,6 +351,14 @@ function DonatePage() {
                 </p>
             </BSCard.Header>
             <BSCard.Body className="donate-form-body d-flex flex-column flex-grow-1">
+                <div className="text-center my-auto p-4 text-muted">
+                    <p className="mb-0">
+                        We are working on the payment gateway. Sorry for the
+                        inconvenience and donate through the direct payment
+                        options.
+                    </p>
+                </div>
+                {/* 
                 <Form
                     onSubmit={handlePaymentSubmit}
                     className="d-flex flex-column h-100"
@@ -449,6 +457,7 @@ function DonatePage() {
                         <span className="btn-icon">→</span>
                     </Button>
                 </Form>
+                */}
             </BSCard.Body>
         </BSCard>
     );
@@ -491,7 +500,7 @@ function DonatePage() {
                         email: paymentForm.email,
                         phone: paymentForm.phone,
                     }),
-                }
+                },
             );
 
             if (!response.ok) {

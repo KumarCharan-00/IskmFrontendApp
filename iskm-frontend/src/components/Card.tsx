@@ -134,7 +134,7 @@ const Card: React.FC<CardProps> = ({
                             </div>
                         )}
                         {props.quote && (
-                            <div className="text-start quote-bx quote-bx--pink color-white">
+                            <div className="text-start quote-bx quote-bx--pink color-black">
                                 <blockquote className="blockquote m-3">
                                     <i className="mb-0 fw-regular">
                                         {props.quote}
