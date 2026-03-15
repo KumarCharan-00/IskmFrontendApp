@@ -64,34 +64,70 @@ const FloatingForm: React.FC<FloatingFormType> = ({
     );
 };
 
-const contactCards = [
-    {
-        title: "UPI Details",
-        previewText: (
-            <div className="mb-4">
-                <h6 className="text-primary">
-                    <i className="bi bi-bank me-2"></i> UPI IDs
-                </h6>
-                <div className="fw-bold">
-                    <div>iskmproddutur@ybl</div>
-                    <div>iskmproddutur@sbipay</div>
-                    <div>iskmproddutur@hdfcpay</div>
+const directDonationCard: ReactElement = (
+    <BSCard className="shadow-lg border-0 mx-auto w-100" style={{ maxWidth: "800px", borderRadius: "1rem" }}>
+        <BSCard.Body className="p-4 p-md-5">
+            <div className="d-flex flex-column flex-md-row justify-content-between align-items-center align-items-md-stretch gap-4 gap-md-5">
+                {/* Left: UPI Details */}
+                <div className="d-flex flex-column justify-content-center align-items-center w-100 h-100" style={{ flex: 1 }}>
+                    <h5 className="text-primary mb-3 text-center w-100 fw-bold">
+                        <i className="bi bi-bank me-2"></i> UPI ID & QR
+                    </h5>
+                    <div className="fw-bold fs-5 mb-3 text-center text-dark">
+                        6281469214@icici
+                    </div>
+                    <div className="qr-code-container text-center bg-white p-2 rounded shadow-sm border">
+                        <img
+                            src="/upi-qr.jpeg"
+                            alt="UPI QR Code"
+                            className="img-fluid rounded"
+                            style={{ maxWidth: "200px" }}
+                            title="Scan to pay with any UPI app"
+                        />
+                        <div className="mt-2 text-muted small fw-medium">
+                            Scan to pay with any UPI app
+                        </div>
+                    </div>
+                </div>
+
+                {/* Vertical/Horizontal Divider */}
+                <div className="d-block d-md-none w-100 border-top my-2"></div>
+                <div className="d-none d-md-block border-start opacity-75"></div>
+
+                {/* Right: Bank Details */}
+                <div className="w-100 d-flex flex-column justify-content-center h-100" style={{ flex: 1 }}>
+                    <h5 className="text-primary mb-4 text-center text-md-start w-100 fw-bold">
+                        <i className="bi bi-shield-check me-2"></i> Bank Account Details
+                    </h5>
+                    <div className="fs-6 w-100 text-center text-md-start">
+                        <div className="mb-3">
+                            <span className="text-secondary d-block small mb-1 fw-semibold">BANK NAME</span>
+                            <span className="fw-bold text-dark fs-5">ICICI BANK</span>
+                        </div>
+                        <div className="mb-3">
+                            <span className="text-secondary d-block small mb-1 fw-semibold">ACCOUNT NUMBER</span>
+                            <span className="fw-bold text-dark fs-5">067501507805</span>
+                        </div>
+                        <div className="mb-3">
+                            <span className="text-secondary d-block small mb-1 fw-semibold">ACCOUNT NAME</span>
+                            <span className="fw-bold text-dark fs-6" style={{ wordBreak: 'break-word' }}>BOORAGADDA VAMSI KRISHNA</span>
+                        </div>
+                        <div className="d-flex flex-row justify-content-center justify-content-md-start gap-4 mt-2">
+                            <div>
+                                <span className="text-secondary d-block small mb-1 fw-semibold">ACCOUNT TYPE</span>
+                                <span className="fw-bold text-dark">Savings</span>
+                            </div>
+                            <div>
+                                <span className="text-secondary d-block small mb-1 fw-semibold">IFSC CODE</span>
+                                <span className="fw-bold text-dark">ICIC0000598</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        ),
-    },
-    {
-        title: "Bank Account Details",
-        previewText: (
-            <div className="mb-0">
-                <h6 className="text-primary">Bank Account Details</h6>
-                <p>
-                    <em>(Account details)</em>
-                </p>
-            </div>
-        ),
-    },
-];
+        </BSCard.Body>
+    </BSCard>
+);
 
 const cleanupRazorpay = (): void => {
     // Remove Razorpay containers
@@ -608,9 +644,13 @@ function DonatePage() {
                 title="Direct Donation Methods"
                 subtitle="Offer your seva through Bank Transfer, UPI, or In-Person Donation at the temple."
                 backgroundType="blue"
-                className="contact-info-section mb-0"
-                type="Bootstrap"
-                cards={contactCards}
+                className="contact-info-section mb-0 py-5"
+                type="TextOnly"
+                bodyElement={
+                    <Container fluid="lg" className="py-2">
+                        {directDonationCard}
+                    </Container>
+                }
             />
         </div>
     );
