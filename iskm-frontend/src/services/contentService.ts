@@ -32,7 +32,9 @@ export const fetchPublicContent = async (
 ): Promise<ContentDTO[]> => {
     try {
         const baseUrl =
-            import.meta.env.VITE_API_BASE_URL || "http://localhost:8080";
+            (window as any).ENV?.VITE_API_BASE_URL ||
+            import.meta.env.VITE_API_BASE_URL ||
+            "http://localhost:8080";
         const url = new URL(`${baseUrl}/public/content`);
 
         if (types && types.length > 0) {

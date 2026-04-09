@@ -562,9 +562,10 @@ function DonatePage() {
 
         try {
             console.log("started API call");
+            const baseUrl = (window as any).ENV?.VITE_API_BASE_URL || import.meta.env.VITE_API_BASE_URL || "http://localhost:8080";
             // Call your backend API to initiate payment
             const response = await fetch(
-                `${import.meta.env.VITE_API_BASE_URL}/api/pay-req`,
+                `${baseUrl}/api/pay-req`,
                 {
                     method: "POST",
                     headers: {

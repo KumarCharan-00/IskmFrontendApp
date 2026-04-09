@@ -1,9 +1,6 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
 
-ARG VITE_API_BASE_URL
-ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
-
 # Copy package files from the sub-directory first for better caching
 COPY iskm-frontend/package.json iskm-frontend/package-lock.json* iskm-frontend/yarn.lock* ./
 RUN npm install
@@ -18,6 +15,11 @@ FROM nginx:alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
 # Copy custom nginx configuration for React router
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Add script to inject runtime environment variables into the frontend
+RUN echo '#!/bin/sh' > /docker-entrypoint.d/40-inject-env.sh && \
+    echo 'echo "window.ENV = { VITE_API_BASE_URL: '\''${VITE_API_BASE_URL}'\'' };" > /usr/share/nginx/html/config.js' >> /docker-entrypoint.d/40-inject-env.sh && \
+    chmod +x /docker-entrypoint.d/40-inject-env.sh
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
