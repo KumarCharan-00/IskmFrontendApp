@@ -14,26 +14,26 @@ import { fetchPublicContent, getImageSrc } from "../services/contentService";
 
 const slides = [
     {
-        title: "Welcome to Our Community",
+        title: "Come Closer to Kṛṣṇa",
         description:
-            "Join us in celebrating spiritual traditions and connecting with like-minded individuals.",
+            "Discover knowledge, devotion, and association that transform your life.",
         imageSrc: c1,
     },
     {
         title: "Upcoming Events",
         description:
-            "Discover our calendar of events, festivals, and gatherings throughout the year.",
+            "Join us for festivals, events, and spiritual gatherings that bring you closer to Kṛṣṇa",
         imageSrc: c2,
         buttonHref: "/events",
-        buttonText: "View Seva Programs",
+        buttonText: "Explore Events",
     },
     {
-        title: "Support Our Mission",
+        title: "Support Śrīla Prabhupāda’s Mission",
         description:
-            "Your donations help us continue our work and serve the community.",
+            "Contribute with love and help us expand Kṛṣṇa consciousness in the community",
         imageSrc: c3,
         buttonHref: "/donate#seva-options",
-        buttonText: "Support Us",
+        buttonText: "Offer Your Seva",
     },
 ];
 
@@ -196,7 +196,7 @@ export default function Home() {
 
             {/* Custom Donation Section */}
             <Section
-                title="Support Our Mission"
+                title="Support Śrīla Prabhupāda’s Mission"
                 subtitle="Your generous donations help us continue our work and serve the community."
                 content="Join us in making a difference. Your support enables us to expand our programs, maintain our facilities, and reach more individuals with our message of devotion and service."
                 backgroundType="blue"

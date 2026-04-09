@@ -77,13 +77,14 @@ const activitiesCards = [
         imageAlt: "Book Distribution",
         title: "Book Distribution",
         previewText:
-            "Transcendental knowledge through Srila Prabhupada's books",
+            "Distributing Transcendental knowledge through Srila Prabhupada's books",
     },
     {
         imageSrc: "",
         imageAlt: "Prasadam Distribution",
         title: "Prasadam Distribution",
-        previewText: "Serving sanctified vegetarian food to everyone",
+        previewText:
+            "Serving Krishna Prasadam (sanctified vegetarian food) to everyone",
     },
     {
         imageSrc: "",
@@ -93,16 +94,15 @@ const activitiesCards = [
     },
     {
         imageSrc: "",
-        imageAlt: "Bhakti Classes",
-        title: "Bhakti Classes",
-        previewText: "Enlightening discussions and spiritual study sessions",
+        imageAlt: "Enlightening sessions",
+        title: "Enlightening sessions",
+        previewText: "Enlightening discussions and spiritual sessions",
     },
     {
         imageSrc: "",
         imageAlt: "Festivals & Celebrations",
         title: "Festivals & Celebrations",
-        previewText:
-            "Observing all major Vaishnava festivals with love and devotion",
+        previewText: "Observing Vaishnava festivals with love and devotion",
     },
     {
         imageSrc: "",
@@ -114,7 +114,8 @@ const activitiesCards = [
         imageSrc: "",
         imageAlt: "Sunday Feast Program",
         title: "Sunday Feast Program",
-        previewText: "A weekly festival of devotion, kirtan, and prasadam",
+        previewText:
+            "A weekly festival like evening of devotion, kirtan, and sumptuous prasadam",
     },
 ];
 

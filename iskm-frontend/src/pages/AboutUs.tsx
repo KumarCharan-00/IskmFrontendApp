@@ -9,87 +9,84 @@ import {
     FaWhatsapp,
 } from "react-icons/fa";
 
-
-
 const contactCards = [
-        {
-            title: "Contact Details",
-            previewText: (
-                <div className="text-dark">
-                    <div className="mb-4">
-                        <h6 className="text-black">
-                            <FaEnvelope className="me-2" /> Email
-                        </h6>
-                        <a
-                            href="mailto:iskmproddutur@gmail.com"
-                            className="text-pink fw-bold text-decoration-none"
-                        >
-                            iskmproddutur@gmail.com
-                        </a>
-                    </div>
-                    <div className="mb-0">
-                        <h6 className="text-black">
-                            <FaPhoneAlt className="me-2" /> Phone Numbers
-                        </h6>
-                        <div className="">
-                            <div>+91 62814 69214</div>
-                            <div>+91 93900 64180</div>
-                            <div>+91 90526 29052</div>
-                        </div>
+    {
+        title: "Contact Details",
+        previewText: (
+            <div className="text-dark">
+                <div className="mb-4">
+                    <h6 className="text-black">
+                        <FaEnvelope className="me-2" /> Email
+                    </h6>
+                    <a
+                        href="mailto:iskmproddutur@gmail.com"
+                        className="text-pink fw-bold text-decoration-none"
+                    >
+                        iskmproddutur@gmail.com
+                    </a>
+                </div>
+                <div className="mb-0">
+                    <h6 className="text-black">
+                        <FaPhoneAlt className="me-2" /> Phone Numbers
+                    </h6>
+                    <div className="">
+                        <div>+91 62814 69214</div>
+                        <div>+91 93900 64180</div>
+                        <div>+91 90526 29052</div>
                     </div>
                 </div>
-            )
-        },
-        {
-            title: "Social Media",
-            previewText: (
-                <div className="text-dark">
-                    <div className="mb-4">
-                        <h6 className="text-black">
-                            <FaWhatsapp className="me-2" /> WhatsApp
-                        </h6>
-                        <a
-                            href="https://wa.me/916281469214"
-                            className="text-pink fw-bold text-decoration-none"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            +91 62814 69214
-                        </a>
-                    </div>
-                    <div className="mb-4">
-                        <h6 className="text-black">
-                            <FaInstagram className="me-2" /> Instagram
-                        </h6>
-                        <a
-                            href="https://instagram.com/iskm.proddatur"
-                            className="text-pink fw-bold text-decoration-none"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            iskm.proddatur
-                        </a>
-                    </div>
-                    <div className="mb-4">
-                        <h6 className="text-black">
-                            <FaYoutube className="me-2" /> YouTube
-                        </h6>
-                        <a
-                            href="https://youtube.com/@ISKMProddatur"
-                            className="text-pink fw-bold text-decoration-none"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            @ISKMProddatur
-                        </a>
-                    </div>
+            </div>
+        ),
+    },
+    {
+        title: "Social Media",
+        previewText: (
+            <div className="text-dark">
+                <div className="mb-4">
+                    <h6 className="text-black">
+                        <FaWhatsapp className="me-2" /> WhatsApp
+                    </h6>
+                    <a
+                        href="https://wa.me/916281469214"
+                        className="text-pink fw-bold text-decoration-none"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        +91 62814 69214
+                    </a>
                 </div>
-            )
-        }
-    ];
+                <div className="mb-4">
+                    <h6 className="text-black">
+                        <FaInstagram className="me-2" /> Instagram
+                    </h6>
+                    <a
+                        href="https://instagram.com/iskm.proddatur"
+                        className="text-pink fw-bold text-decoration-none"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        iskm.proddatur
+                    </a>
+                </div>
+                <div className="mb-4">
+                    <h6 className="text-black">
+                        <FaYoutube className="me-2" /> YouTube
+                    </h6>
+                    <a
+                        href="https://youtube.com/@ISKMProddatur"
+                        className="text-pink fw-bold text-decoration-none"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        @ISKMProddatur
+                    </a>
+                </div>
+            </div>
+        ),
+    },
+];
 
 function AboutUs() {
-
     return (
         <div className="about-us-page">
             {/* Hero Section */}
@@ -109,20 +106,23 @@ function AboutUs() {
                                     teachings of Lord Sri Krishna, as presented
                                     by His Divine Grace A. C. Bhaktivedanta
                                     Swami Srila Prabhupada, the Founder-Ācārya
-                                    of the Hare Krishna Movement.
+                                    of the Hare Krishna Movement World-Wide.
                                 </p>
                                 <div className="htl-txt-ct-1 mt-4">
                                     <p className="htl-txt-ct-placeholder-1">
-                                        Situated near Panduranga Swamy Temple,
-                                        Mydukur Road, Proddatur, Andhra Pradesh,
-                                        ISKM Proddatur stands as a vibrant
-                                        center of spiritual learning, devotion,
-                                        and service. The temple is home to our
-                                        beloved Deities — <em>Sri Sri Radha Madan
-                                        Mohan, Sri Sri Jagannath Baladev
-                                        Subhadra, and Sri Sri Nitay Gaura
-                                        Sundar</em>, who bestow Their divine mercy
-                                        upon all who visit.
+                                        Situated Opp. RTC Bus Stand, Mydukur
+                                        Road, Proddatur, Andhra Pradesh, ISKM
+                                        Proddatur stands as a vibrant center of
+                                        spiritual learning, devotion, and
+                                        service. The temple is home to our
+                                        beloved Deities —{" "}
+                                        <em>
+                                            Sri Sri Radha Madan Mohan, Sri Sri
+                                            Jagannath Baladev Subhadra, and Sri
+                                            Sri Nitay Gaura Sundar
+                                        </em>
+                                        , who bestow Their divine mercy upon all
+                                        who visit.
                                     </p>
                                 </div>
                             </div>
@@ -182,8 +182,8 @@ function AboutUs() {
                 bodyElement={
                     <div className="mantra-box">
                         <p className="mantra-text">
-                            Hare Krishna, Hare Krishna, Krishna Krishna,
-                            Hare Hare <br />
+                            Hare Krishna, Hare Krishna, Krishna Krishna, Hare
+                            Hare <br />
                             Hare Rama, Hare Rama, Rama Rama, Hare Hare.
                         </p>
                     </div>

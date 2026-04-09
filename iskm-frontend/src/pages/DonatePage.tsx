@@ -65,11 +65,17 @@ const FloatingForm: React.FC<FloatingFormType> = ({
 };
 
 const directDonationCard: ReactElement = (
-    <BSCard className="shadow-lg border-0 mx-auto w-100" style={{ maxWidth: "800px", borderRadius: "1rem" }}>
+    <BSCard
+        className="shadow-lg border-0 mx-auto w-100"
+        style={{ maxWidth: "1000px", borderRadius: "1rem" }}
+    >
         <BSCard.Body className="p-4 p-md-5">
             <div className="d-flex flex-column flex-md-row justify-content-between align-items-center align-items-md-stretch gap-4 gap-md-5">
                 {/* Left: UPI Details */}
-                <div className="d-flex flex-column justify-content-center align-items-center w-100 h-100" style={{ flex: 1 }}>
+                <div
+                    className="d-flex flex-column justify-content-center align-items-center w-100 h-100"
+                    style={{ flex: 1 }}
+                >
                     <h5 className="text-primary mb-3 text-center w-100 fw-bold">
                         <i className="bi bi-bank me-2"></i> UPI ID & QR
                     </h5>
@@ -88,6 +94,18 @@ const directDonationCard: ReactElement = (
                             Scan to pay with any UPI app
                         </div>
                     </div>
+                    <div className="text-center mt-3">
+                        <h5>
+                            <b>Temple President, ISKM PRODDATUR</b>
+                        </h5>
+                        <p>BOORAGADDA VAMSI KRISHNA</p>
+                    </div>
+                    <div className="text-center">
+                        <small>
+                            We are waiting for Trust's QR Code, until then you
+                            can use this QR to scan and pay
+                        </small>
+                    </div>
                 </div>
 
                 {/* Vertical/Horizontal Divider */}
@@ -95,32 +113,55 @@ const directDonationCard: ReactElement = (
                 <div className="d-none d-md-block border-start opacity-75"></div>
 
                 {/* Right: Bank Details */}
-                <div className="w-100 d-flex flex-column justify-content-center h-100" style={{ flex: 1 }}>
-                    <h5 className="text-primary mb-4 text-center text-md-start w-100 fw-bold">
-                        <i className="bi bi-shield-check me-2"></i> Bank Account Details
+                <div
+                    className="w-100 d-flex flex-column justify-content-center h-100"
+                    style={{ flex: 1 }}
+                >
+                    <h5 className="text-primary mb-md-5 mb-3 text-center text-md-start w-100 fw-bold">
+                        TRUST BANK ACCOUNT DETAILS
                     </h5>
-                    <div className="fs-6 w-100 text-center text-md-start">
+                    <div className="fs-6 w-100 text-center text-md-start mt-md-2">
                         <div className="mb-3">
-                            <span className="text-secondary d-block small mb-1 fw-semibold">BANK NAME</span>
-                            <span className="fw-bold text-dark fs-5">ICICI BANK</span>
+                            <span className="text-secondary d-block small mb-1 fw-semibold">
+                                BANK NAME
+                            </span>
+                            <span className="fw-bold text-dark fs-5">
+                                KARUR VYSYA BANK
+                            </span>
                         </div>
                         <div className="mb-3">
-                            <span className="text-secondary d-block small mb-1 fw-semibold">ACCOUNT NUMBER</span>
-                            <span className="fw-bold text-dark fs-5">067501507805</span>
+                            <span className="text-secondary d-block small mb-1 fw-semibold">
+                                ACCOUNT NUMBER
+                            </span>
+                            <span className="fw-bold text-dark fs-5">
+                                1407010000000407
+                            </span>
                         </div>
                         <div className="mb-3">
-                            <span className="text-secondary d-block small mb-1 fw-semibold">ACCOUNT NAME</span>
-                            <span className="fw-bold text-dark fs-6" style={{ wordBreak: 'break-word' }}>BOORAGADDA VAMSI KRISHNA</span>
+                            <span className="text-secondary d-block small mb-1 fw-semibold">
+                                ACCOUNT NAME
+                            </span>
+                            <span
+                                className="fw-bold text-dark fs-6"
+                                style={{ wordBreak: "break-word" }}
+                            >
+                                ISKM PRODDATUR
+                            </span>
                         </div>
-                        <div className="d-flex flex-row justify-content-center justify-content-md-start gap-4 mt-2">
-                            <div>
-                                <span className="text-secondary d-block small mb-1 fw-semibold">ACCOUNT TYPE</span>
-                                <span className="fw-bold text-dark">Savings</span>
-                            </div>
-                            <div>
-                                <span className="text-secondary d-block small mb-1 fw-semibold">IFSC CODE</span>
-                                <span className="fw-bold text-dark">ICIC0000598</span>
-                            </div>
+                        <div className="d-flex flex-row justify-content-center justify-content-md-start gap-4 mt-2"></div>
+                        <div className="mb-3">
+                            <span className="text-secondary d-block small mb-1 fw-semibold">
+                                ACCOUNT TYPE
+                            </span>
+                            <span className="fw-bold text-dark">Current</span>
+                        </div>
+                        <div className="mb-3">
+                            <span className="text-secondary d-block small mb-1 fw-semibold">
+                                IFSC CODE
+                            </span>
+                            <span className="fw-bold text-dark">
+                                KVBL0001407
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -383,7 +424,7 @@ function DonatePage() {
             <BSCard.Header className="donate-form-title text-white border-0">
                 <h4 className="mb-0 fw-bold">Make a Donation</h4>
                 <p className="mb-0 mt-1 small opacity-90">
-                    Support our cause with your generosity
+                    Support Śrīla Prabhupāda’s cause with your generosity
                 </p>
             </BSCard.Header>
             <BSCard.Body className="donate-form-body d-flex flex-column flex-grow-1">
@@ -588,7 +629,7 @@ function DonatePage() {
     return (
         <div className="donate-page">
             <Section
-                title="Support Our Mission"
+                title="Support Śrīla Prabhupāda’s Mission"
                 subtitle="Join us in making a difference"
                 content="Your generous donation helps us continue our
                                 spiritual and community services, spread
