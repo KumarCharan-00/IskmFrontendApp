@@ -9,6 +9,7 @@ import {
 } from "react-bootstrap";
 import { Section } from "../components/Section";
 import "../assets/css/donate.css";
+import upiQr from "../assets/images/upi-qr.jpeg";
 
 interface FloatingFormType {
     type?: string;
@@ -84,7 +85,7 @@ const directDonationCard: ReactElement = (
                     </div>
                     <div className="qr-code-container text-center bg-white p-2 rounded shadow-sm border">
                         <img
-                            src="/upi-qr.jpeg"
+                            src={upiQr}
                             alt="UPI QR Code"
                             className="img-fluid rounded"
                             style={{ maxWidth: "200px" }}

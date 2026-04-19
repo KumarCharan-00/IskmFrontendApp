@@ -1,9 +1,9 @@
 import { Carousel, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "../assets/css/carousal.css";
-import c1 from "../assets/images/carousalImage1.jpg";
-import c2 from "../assets/images/carousalImage2.jpg";
-import c3 from "../assets/images/carousalImage3.jpg";
+import c1 from "../assets/images/MainIdol.png";
+import c2 from "../assets/images/JayaVijaya.png";
+import c3 from "../assets/images/SriPrabhuPadhula.png";
 import { Section } from "../components/Section";
 import annadanamImage from "../assets/images/annadanam.jpg";
 import youthLearningImage from "../assets/images/youthLearning.jpg";
