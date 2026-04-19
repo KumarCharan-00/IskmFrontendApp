@@ -47,7 +47,7 @@ const contactCards = [
                         <FaWhatsapp className="me-2" /> WhatsApp
                     </h6>
                     <a
-                        href="https://wa.me/916281469214"
+                        href="https://wa.me/917893636462"
                         className="text-pink fw-bold text-decoration-none"
                         target="_blank"
                         rel="noopener noreferrer"

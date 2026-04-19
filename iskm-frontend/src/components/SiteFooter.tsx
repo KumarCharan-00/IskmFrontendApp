@@ -74,7 +74,7 @@ function SiteFooter() {
 
                         <div className="d-flex gap-2">
                             <SocialIcon
-                                href="https://wa.me/916281469214"
+                                href="https://wa.me/917893636462"
                                 label="WhatsApp"
                             >
                                 <FaWhatsapp />
@@ -106,7 +106,8 @@ function SiteFooter() {
                             <p className="small mb-2">
                                 Proddatur, Andhra Pradesh - 516360
                             </p>
-                            <p className="small mb-2">+(91) 62814 69214</p>
+                            <p className="small mb-2">WhatsApp : +91 7893636462</p>
+                            <p className="small mb-2">Call : +91 6281469214</p>
                             <p className="small mb-0">
                                 <a
                                     href="mailto::iskmproddutur@gmail.com"
