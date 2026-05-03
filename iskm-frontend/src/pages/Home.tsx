@@ -149,6 +149,7 @@ export default function Home() {
                         imageAlt: item.title,
                         linkHref: "/events",
                         linkText: "View All Sevas",
+                        type: item.type,
                     }));
 
                 const festivals = data
@@ -164,6 +165,7 @@ export default function Home() {
                         linkText: "View All Festivals",
                         startDate: item.showFromDate,
                         endDate: item.showToDate,
+                        type: item.type,
                     }));
 
                 setSevaEvents(sevas ? sevas : activities);

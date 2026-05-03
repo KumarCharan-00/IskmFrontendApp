@@ -15,6 +15,7 @@ export interface CardProps {
     secondaryColor?: "pink" | "blue" | "white";
     startDate?: string;
     endDate?: string;
+    type?: string;
 }
 
 const Card: React.FC<CardProps> = ({
@@ -49,7 +50,7 @@ const Card: React.FC<CardProps> = ({
                 )}
                 <div className="d-flex flex-column justify-content-between card-body">
                     <h5 className="card-title">{props.title}</h5>
-                    {(props.startDate || props.endDate) && (
+                    {(props.startDate || props.endDate) && props.type?.toLowerCase() !== "seva" && (
                         <div className="d-flex flex-wrap align-items-center justify-content-center mb-0">
                             <div className="gap-2 d-flex align-items-center">
                                 <span className={`date-label color-${colorS}`}>
@@ -113,7 +114,7 @@ const Card: React.FC<CardProps> = ({
                         </div>
                     )}
                     <div className="p-4 flex-grow-1 d-inline-flex flex-column gap-3">
-                        {(props.startDate || props.endDate) && (
+                        {(props.startDate || props.endDate) && props.type?.toLowerCase() !== "seva" && (
                             <div className="d-flex flex-wrap align-items-center justify-content-start gap-2 mb-0">
                                 <span className="date-label">From</span>
                                 {props.startDate && (

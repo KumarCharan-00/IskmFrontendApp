@@ -81,6 +81,7 @@ export const Section: React.FC<SectionProps> = (props) => {
                         secondaryColor={colorS}
                         startDate={card.startDate}
                         endDate={card.endDate}
+                        type={card.type}
                     />
                 ))}
         </div>

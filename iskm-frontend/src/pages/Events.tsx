@@ -141,6 +141,7 @@ function Events() {
                         linkText: "Support Us",
                         startDate: item.showFromDate,
                         endDate: item.showToDate,
+                        type: item.type,
                     }));
 
                 const festivals = data
@@ -156,6 +157,7 @@ function Events() {
                         linkText: "Support Us",
                         startDate: item.showFromDate,
                         endDate: item.showToDate,
+                        type: item.type,
                     }));
 
                 setSevaEvents(sevas.length > 0 ? sevas : events);
