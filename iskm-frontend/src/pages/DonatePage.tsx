@@ -9,7 +9,7 @@ import {
 } from "react-bootstrap";
 import { Section } from "../components/Section";
 import "../assets/css/donate.css";
-import upiQr from "../assets/images/upi-qr.jpeg";
+import upiQr from "../assets/images/upi-qr.png";
 
 interface FloatingFormType {
     type?: string;
@@ -81,7 +81,7 @@ const directDonationCard: ReactElement = (
                         <i className="bi bi-bank me-2"></i> UPI ID & QR
                     </h5>
                     <div className="fw-bold fs-5 mb-3 text-center text-dark">
-                        6281469214@icici
+                        iskmproddatur@ptyes
                     </div>
                     <div className="qr-code-container text-center bg-white p-2 rounded shadow-sm border">
                         <img
@@ -97,14 +97,13 @@ const directDonationCard: ReactElement = (
                     </div>
                     <div className="text-center mt-3">
                         <h5>
-                            <b>Temple President, ISKM PRODDATUR</b>
+                            <b>Iskm Proddatur</b>
                         </h5>
-                        <p>BOORAGADDA VAMSI KRISHNA</p>
                     </div>
                     <div className="text-center">
                         <small>
-                            We are waiting for Trust's QR Code, until then you
-                            can use this QR to scan and pay
+                            Please use the above UPI ID to donate to ISKM
+                            Proddatur
                         </small>
                     </div>
                 </div>
@@ -561,24 +560,24 @@ function DonatePage() {
 
         try {
             console.log("started API call");
-            const baseUrl = (window as any).ENV?.VITE_API_BASE_URL || import.meta.env.VITE_API_BASE_URL || "http://localhost:8080";
+            const baseUrl =
+                (window as any).ENV?.VITE_API_BASE_URL ||
+                import.meta.env.VITE_API_BASE_URL ||
+                "http://localhost:8080";
             // Call your backend API to initiate payment
-            const response = await fetch(
-                `${baseUrl}/api/pay-req`,
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Access-Controle-Allow-Origin": "*",
-                    },
-                    body: JSON.stringify({
-                        name: paymentForm.name,
-                        amount: parseInt(amount),
-                        email: paymentForm.email,
-                        phone: paymentForm.phone,
-                    }),
+            const response = await fetch(`${baseUrl}/api/pay-req`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Access-Controle-Allow-Origin": "*",
                 },
-            );
+                body: JSON.stringify({
+                    name: paymentForm.name,
+                    amount: parseInt(amount),
+                    email: paymentForm.email,
+                    phone: paymentForm.phone,
+                }),
+            });
 
             if (!response.ok) {
                 throw new Error("Payment initiation failed");
