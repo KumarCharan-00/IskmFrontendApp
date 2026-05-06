@@ -57,6 +57,15 @@ function SiteFooter() {
                             >
                                 About Us
                             </NavLink>
+                            <a
+                                href="https://prabhupadabooks.store/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="medium color-blue"
+                                style={{ textDecoration: "none" }}
+                            >
+                                Books
+                            </a>
                             <NavLink
                                 to="/donate#get-in-touch"
                                 className="medium color-blue"

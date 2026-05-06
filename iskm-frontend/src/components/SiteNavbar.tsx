@@ -62,6 +62,14 @@ function SiteNavbar() {
                         >
                             About Us
                         </NavLink>
+                        <a
+                            href="https://prabhupadabooks.store/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="nav-link py-2 btn custom-btn color-pink fw-bold"
+                        >
+                            Books
+                        </a>
                         <NavLink
                             to="/donate"
                             className={linkClassNames}
