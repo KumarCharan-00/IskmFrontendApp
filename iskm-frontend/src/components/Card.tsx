@@ -36,6 +36,15 @@ const Card: React.FC<CardProps> = ({
     const colorP = props.primaryColor ? props.primaryColor : "pink";
     const colorS = props.secondaryColor ? props.secondaryColor : "blue";
 
+    const formatDate = (dateStr?: string) => {
+        if (!dateStr) return "";
+        const parts = dateStr.split("-");
+        if (parts.length === 3) {
+            return `${parts[2]}-${parts[1]}-${parts[0]}`;
+        }
+        return dateStr;
+    };
+
     return (
         <>
             <div className="card" onClick={handleCardClick}>
@@ -60,7 +69,7 @@ const Card: React.FC<CardProps> = ({
                                     <span
                                         className={`festival-date festival-date--start color-${colorP}`}
                                     >
-                                        {props.startDate}
+                                        {formatDate(props.startDate)}
                                     </span>
                                 )}
                             </div>
@@ -72,7 +81,7 @@ const Card: React.FC<CardProps> = ({
                                     <span
                                         className={`festival-date festival-date--end date-value color-${colorP}`}
                                     >
-                                        {props.endDate}
+                                        {formatDate(props.endDate)}
                                     </span>
                                 )}
                             </div>
@@ -121,7 +130,7 @@ const Card: React.FC<CardProps> = ({
                                     <span
                                         className={`festival-date festival-date--start color-${colorS}`}
                                     >
-                                        {props.startDate}
+                                        {formatDate(props.startDate)}
                                     </span>
                                 )}
                                 <span className="date-label">to</span>
@@ -129,7 +138,7 @@ const Card: React.FC<CardProps> = ({
                                     <span
                                         className={`festival-date festival-date--end date-value color-${colorS}`}
                                     >
-                                        {props.endDate}
+                                        {formatDate(props.endDate)}
                                     </span>
                                 )}
                             </div>
