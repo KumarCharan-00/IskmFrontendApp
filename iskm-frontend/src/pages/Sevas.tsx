@@ -73,28 +73,33 @@ const events = [
 
 function Sevas() {
     const [sevaEvents, setSevaEvents] = useState(events);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const loadContent = async () => {
-            const data = await fetchPublicContent(["SEVA"]);
-            if (data && data.length > 0) {
-                const sevas = data
-                    .filter((item: any) => item.type === "SEVA")
-                    .map((item: any) => ({
-                        title: item.title,
-                        previewText: item.previewText || "",
-                        fullText: item.fullText || "",
-                        quote: item.quote || "",
-                        imageSrc: getImageSrc(item.images?.[0]) || "",
-                        imageAlt: item.title,
-                        linkHref: "/donate#seva-options",
-                        linkText: "Support Us",
-                        startDate: item.showFromDate,
-                        endDate: item.showToDate,
-                        type: item.type,
-                    }));
+            try {
+                const data = await fetchPublicContent(["SEVA"]);
+                if (data && data.length > 0) {
+                    const sevas = data
+                        .filter((item: any) => item.type === "SEVA")
+                        .map((item: any) => ({
+                            title: item.title,
+                            previewText: item.previewText || "",
+                            fullText: item.fullText || "",
+                            quote: item.quote || "",
+                            imageSrc: getImageSrc(item.images?.[0]) || "",
+                            imageAlt: item.title,
+                            linkHref: "/donate#seva-options",
+                            linkText: "Support Us",
+                            startDate: item.showFromDate,
+                            endDate: item.showToDate,
+                            type: item.type,
+                        }));
 
-                setSevaEvents(sevas.length > 0 ? sevas : events);
+                    setSevaEvents(sevas.length > 0 ? sevas : events);
+                }
+            } finally {
+                setLoading(false);
             }
         };
         loadContent();
@@ -115,8 +120,9 @@ function Sevas() {
                 className="events-section mt-0 mb-0"
                 showLink={false}
                 type="Custom"
+                loading={loading}
             />
-            
+
             <Section
                 title="Donate & Participate in Divine Seva"
                 subtitle={

@@ -1,6 +1,7 @@
 import React, { type JSX, type ReactNode } from "react";
 import Card from "./Card";
 import type { CardProps } from "./Card";
+import { SkeletonCard } from "./SkeletonCard";
 import { Row, Col, Card as BSCard } from "react-bootstrap";
 import "../assets/css/section.css";
 
@@ -26,6 +27,8 @@ interface SectionProps {
     showTitle?: boolean;
     startDate?: string;
     endDate?: string;
+    loading?: boolean;
+    loadingCount?: number;
 }
 
 // background color -> [primary btn/link color, secondary link/btn color]
@@ -66,7 +69,12 @@ export const Section: React.FC<SectionProps> = (props) => {
 
     const loadInCustomCards: ReactNode = (
         <div className="cards-container mt-5">
-            {props.cards &&
+            {props.loading ? (
+                Array.from({ length: props.loadingCount || 3 }).map((_, index) => (
+                    <SkeletonCard key={index} />
+                ))
+            ) : (
+                props.cards &&
                 props.cards.map((card, index) => (
                     <Card
                         key={index}
@@ -84,7 +92,8 @@ export const Section: React.FC<SectionProps> = (props) => {
                         endDate={card.endDate}
                         type={card.type}
                     />
-                ))}
+                ))
+            )}
         </div>
     );
 
@@ -163,7 +172,7 @@ export const Section: React.FC<SectionProps> = (props) => {
                         <p className="section-content mt-4">{props.content}</p>
                     )}
                 </div>
-                {props.cards && props.cards.length > 0 && loadCards}
+                {(props.loading || (props.cards && props.cards.length > 0)) && loadCards}
                 {props.bodyElement}
                 {showSectionFooter && (
                     <div className="section-footer">

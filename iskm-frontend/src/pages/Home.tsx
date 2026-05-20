@@ -133,10 +133,12 @@ export default function Home() {
 
     const [sevaEvents, setSevaEvents] = useState(activities);
     const [festivalEvents, setFestivalEvents] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const loadContent = async () => {
-            const data = await fetchPublicContent(["SEVA", "FESTIVAL"], 3);
+            try {
+                const data = await fetchPublicContent(["SEVA", "FESTIVAL"], 3);
             if (data && data.length > 0) {
                 const sevas = data
                     .filter((item) => item.type === "SEVA")
@@ -168,8 +170,11 @@ export default function Home() {
                         type: item.type,
                     }));
 
-                setSevaEvents(sevas ? sevas : activities);
+                setSevaEvents(sevas && sevas.length > 0 ? sevas : activities);
                 setFestivalEvents(festivals);
+            }
+            } finally {
+                setLoading(false);
             }
         };
         loadContent();
@@ -180,7 +185,7 @@ export default function Home() {
             <Carousal />
 
             {/* Festival Preview Section */}
-            {festivalEvents.length > 0 && (
+            {(loading || festivalEvents.length > 0) && (
                 <Section
                     title="Upcoming Festivals"
                     subtitle="Join us in celebrating our major festivals with devotion and joy."
@@ -193,6 +198,7 @@ export default function Home() {
                     donate={true}
                     donateText="Donate for Festival"
                     type="Custom"
+                    loading={loading}
                 />
             )}
 
@@ -238,6 +244,7 @@ export default function Home() {
                 donate={true}
                 donateText="Join Our Cause"
                 type="Custom"
+                loading={loading}
             />
         </div>
     );
