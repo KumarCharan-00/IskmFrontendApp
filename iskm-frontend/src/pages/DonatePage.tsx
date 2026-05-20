@@ -191,7 +191,14 @@ const cleanupRazorpay = (): void => {
     document.body.style.width = "";
 };
 
+import { useLocation } from "react-router-dom";
+
 function DonatePage() {
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const initialSeva = searchParams.get("sevaId") || "general";
+    const initialSubType = searchParams.get("subTypeId") || "";
+
     const [customAmount, setCustomAmount] = useState(false);
     const [isProcessing, setIsProcessing] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
@@ -222,8 +229,8 @@ function DonatePage() {
 
     const [sevas, setSevas] = useState<any[]>([]);
     const [subTypes, setSubTypes] = useState<any[]>([]);
-    const [selectedSeva, setSelectedSeva] = useState<string>("general");
-    const [selectedSubType, setSelectedSubType] = useState<string>("");
+    const [selectedSeva, setSelectedSeva] = useState<string>(initialSeva);
+    const [selectedSubType, setSelectedSubType] = useState<string>(initialSubType);
 
     useEffect(() => {
         const fetchSevas = async () => {
@@ -269,6 +276,17 @@ function DonatePage() {
             setSelectedSubType("");
         }
     }, [selectedSeva]);
+
+    useEffect(() => {
+        if (selectedSubType && subTypes.length > 0) {
+            const st = subTypes.find((s) => s.id === selectedSubType);
+            if (st && !st.isGeneralDonation && st.amount) {
+                setPaymentForm((prev) => ({ ...prev, amount: st.amount.toString() }));
+                setCustomAmount(true);
+                setPaymentErrors((prev) => ({ ...prev, amount: "" }));
+            }
+        }
+    }, [selectedSubType, subTypes]);
 
     const handleSubTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const val = e.target.value;

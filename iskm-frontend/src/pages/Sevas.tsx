@@ -81,20 +81,28 @@ function Sevas() {
                 const data = await fetchPublicContent(["SEVA"]);
                 if (data && data.length > 0) {
                     const sevas = data
-                        .filter((item: any) => item.type === "SEVA")
-                        .map((item: any) => ({
-                            title: item.title,
-                            previewText: item.previewText || "",
-                            fullText: item.fullText || "",
-                            quote: item.quote || "",
-                            imageSrc: getImageSrc(item.images?.[0]) || "",
-                            imageAlt: item.title,
-                            linkHref: "/donate#seva-options",
-                            linkText: "Support Us",
-                            startDate: item.showFromDate,
-                            endDate: item.showToDate,
-                            type: item.type,
-                        }));
+                        .map((item: any) => {
+                            let queryParams = "";
+                            if (item.seva?.id) {
+                                queryParams = `?sevaId=${item.seva.id}`;
+                                if (item.sevaSubType?.id) {
+                                    queryParams += `&subTypeId=${item.sevaSubType.id}`;
+                                }
+                            }
+                            return {
+                                title: item.title,
+                                previewText: item.previewText || "",
+                                fullText: item.fullText || "",
+                                quote: item.quote || "",
+                                imageSrc: getImageSrc(item.images?.[0]) || "",
+                                imageAlt: item.title,
+                                linkHref: `/donate${queryParams}#seva-options`,
+                                linkText: "Support Us",
+                                startDate: item.showFromDate,
+                                endDate: item.showToDate,
+                                type: item.type,
+                            };
+                        });
 
                     setSevaEvents(sevas.length > 0 ? sevas : events);
                 }
