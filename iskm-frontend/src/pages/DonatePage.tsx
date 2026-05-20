@@ -1,4 +1,4 @@
-import React, { useState, type ReactElement, useId } from "react";
+import React, { useState, useEffect, type ReactElement, useId } from "react";
 import {
     Container,
     Row,
@@ -22,6 +22,7 @@ interface FloatingFormType {
     required?: boolean;
     color?: "blue" | "pink";
     error?: string;
+    disabled?: boolean;
 }
 
 declare global {
@@ -37,6 +38,7 @@ const FloatingForm: React.FC<FloatingFormType> = ({
     color = "pink",
     as,
     error,
+    disabled = false,
     ...props
 }): ReactElement => {
     if (className.includes("form-input")) {
@@ -56,6 +58,7 @@ const FloatingForm: React.FC<FloatingFormType> = ({
                 className={className}
                 autoComplete={props.name}
                 isInvalid={!!error}
+                disabled={disabled}
             />
             <Form.Label htmlFor={id}>{props.labelVal}</Form.Label>
             <Form.Control.Feedback type="invalid">
@@ -204,7 +207,6 @@ function DonatePage() {
         email: "",
     });
 
-    // Payment Form State
     const [paymentForm, setPaymentForm] = useState({
         name: "",
         phone: "",
@@ -217,6 +219,78 @@ function DonatePage() {
         email: "",
         amount: "",
     });
+
+    const [sevas, setSevas] = useState<any[]>([]);
+    const [subTypes, setSubTypes] = useState<any[]>([]);
+    const [selectedSeva, setSelectedSeva] = useState<string>("general");
+    const [selectedSubType, setSelectedSubType] = useState<string>("");
+
+    useEffect(() => {
+        const fetchSevas = async () => {
+            try {
+                const baseUrl =
+                    (window as any).ENV?.VITE_API_BASE_URL ||
+                    import.meta.env.VITE_API_BASE_URL ||
+                    "http://localhost:8080";
+                const response = await fetch(`${baseUrl}/api/sevas`);
+                if (response.ok) {
+                    const data = await response.json();
+                    setSevas(data);
+                }
+            } catch (e) {
+                console.error("Failed to fetch sevas:", e);
+            }
+        };
+        fetchSevas();
+    }, []);
+
+    useEffect(() => {
+        if (selectedSeva && selectedSeva !== "general") {
+            const fetchSubTypes = async () => {
+                try {
+                    const baseUrl =
+                        (window as any).ENV?.VITE_API_BASE_URL ||
+                        import.meta.env.VITE_API_BASE_URL ||
+                        "http://localhost:8080";
+                    const response = await fetch(
+                        `${baseUrl}/api/sevas/${selectedSeva}/subtypes`,
+                    );
+                    if (response.ok) {
+                        const data = await response.json();
+                        setSubTypes(data);
+                    }
+                } catch (e) {
+                    console.error("Failed to fetch sub types:", e);
+                }
+            };
+            fetchSubTypes();
+        } else {
+            setSubTypes([]);
+            setSelectedSubType("");
+        }
+    }, [selectedSeva]);
+
+    const handleSubTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const val = e.target.value;
+        setSelectedSubType(val);
+        const st = subTypes.find((s) => s.id === val);
+        if (st) {
+            if (!st.isGeneralDonation && st.amount) {
+                setPaymentForm((prev) => ({ ...prev, amount: st.amount.toString() }));
+                setCustomAmount(true);
+                setPaymentErrors((prev) => ({ ...prev, amount: "" }));
+            } else {
+                setPaymentForm((prev) => ({ ...prev, amount: "" }));
+                setCustomAmount(false);
+            }
+        }
+    };
+
+    const selectedSubTypeObj = subTypes.find((s) => s.id === selectedSubType);
+    const isFixedAmount =
+        selectedSubTypeObj &&
+        !selectedSubTypeObj.isGeneralDonation &&
+        selectedSubTypeObj.amount;
 
     const CUSTOM_AMOUNT: string = "CUSTOM";
     const amountOptions: Array<string> = [
@@ -467,44 +541,93 @@ function DonatePage() {
                             error={paymentErrors.email}
                         />
 
-                        <Form.Group className="mb-3">
-                            <div className="donation-label fw-semibold mb-3">
-                                Donation Amount (₹)
-                            </div>
-                            <div className="amount-buttons-container d-flex flex-wrap gap-2 mb-3">
-                                {amountOptions.map((amount) => (
-                                    <Button
-                                        key={amount}
-                                        variant={
-                                            btnActiveState(amount)
-                                                ? "primary"
-                                                : "outline-primary"
-                                        }
-                                        className={`amount-btn flex-grow-1 ${
-                                            btnActiveState(amount)
-                                                ? "amount-btn-active"
-                                                : ""
-                                        }`}
-                                        onClick={() => handleAmount(amount)}
-                                        type="button"
-                                    >
-                                        {amount === CUSTOM_AMOUNT
-                                            ? "Enter Amount"
-                                            : "₹" + amount}
-                                    </Button>
+                        <Form.Floating className="mb-3">
+                            <Form.Select
+                                id="sevaSelect"
+                                value={selectedSeva}
+                                onChange={(e) => {
+                                    setSelectedSeva(e.target.value);
+                                    if (e.target.value === "general") {
+                                        setPaymentForm((prev) => ({ ...prev, amount: "" }));
+                                        setCustomAmount(false);
+                                    }
+                                }}
+                                className="form-input-blue"
+                            >
+                                <option value="general">General Donation</option>
+                                {sevas.map((s) => (
+                                    <option key={s.id} value={s.id}>
+                                        {s.name}
+                                    </option>
                                 ))}
-                            </div>
-                            {customAmount && (
-                                <FloatingForm
-                                    type="number"
-                                    name="amount"
-                                    val={paymentForm.amount}
-                                    func={handlePaymentChange}
-                                    labelVal="Amount in Rupees (INR)"
-                                    error={paymentErrors.amount}
-                                />
-                            )}
-                        </Form.Group>
+                            </Form.Select>
+                            <Form.Label htmlFor="sevaSelect">Donation Type</Form.Label>
+                        </Form.Floating>
+
+                        {selectedSeva !== "general" && (
+                            <Form.Floating className="mb-3">
+                                <Form.Select
+                                    id="subTypeSelect"
+                                    value={selectedSubType}
+                                    onChange={handleSubTypeChange as any}
+                                    className="form-input-blue"
+                                >
+                                    <option value="" disabled>
+                                        Select Sub Type
+                                    </option>
+                                    {subTypes.map((st) => (
+                                        <option key={st.id} value={st.id}>
+                                            {st.name} {st.isGeneralDonation ? "(General)" : `(₹${st.amount})`}
+                                        </option>
+                                    ))}
+                                </Form.Select>
+                                <Form.Label htmlFor="subTypeSelect">Seva Sub Type</Form.Label>
+                            </Form.Floating>
+                        )}
+
+                        {(selectedSeva === "general" || selectedSubTypeObj) && (
+                            <Form.Group className="mb-3">
+                                <div className="donation-label fw-semibold mb-3">
+                                    Donation Amount (₹)
+                                </div>
+                                {!isFixedAmount && (
+                                    <div className="amount-buttons-container d-flex flex-wrap gap-2 mb-3">
+                                        {amountOptions.map((amount) => (
+                                            <Button
+                                                key={amount}
+                                                variant={
+                                                    btnActiveState(amount)
+                                                        ? "primary"
+                                                        : "outline-primary"
+                                                }
+                                                className={`amount-btn flex-grow-1 ${
+                                                    btnActiveState(amount)
+                                                        ? "amount-btn-active"
+                                                        : ""
+                                                }`}
+                                                onClick={() => handleAmount(amount)}
+                                                type="button"
+                                            >
+                                                {amount === CUSTOM_AMOUNT
+                                                    ? "Enter Amount"
+                                                    : "₹" + amount}
+                                            </Button>
+                                        ))}
+                                    </div>
+                                )}
+                                {(customAmount || isFixedAmount) && (
+                                    <FloatingForm
+                                        type="number"
+                                        name="amount"
+                                        val={paymentForm.amount}
+                                        func={handlePaymentChange}
+                                        labelVal="Amount in Rupees (INR)"
+                                        error={paymentErrors.amount}
+                                        disabled={!!isFixedAmount}
+                                    />
+                                )}
+                            </Form.Group>
+                        )}
                     </div>
 
                     <Button
