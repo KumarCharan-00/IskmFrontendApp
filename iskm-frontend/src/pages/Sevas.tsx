@@ -1,12 +1,12 @@
+import { useEffect, useState } from "react";
 import { Section } from "../components/Section";
 import "../assets/css/events.css";
+import { fetchPublicContent, getImageSrc } from "../services/contentService";
 import annadanamImage from "../assets/images/annadanam.jpg";
 import youthLearningImage from "../assets/images/youthLearning.jpg";
 import aanadanamImage2 from "../assets/images/aanadanam2.jpg";
 import BhagavadGitaImage from "../assets/images/BhagavadGita.png";
 import SPReading from "../assets/images/PrabhupadReading.webp";
-import { useEffect, useState } from "react";
-import { fetchPublicContent, getImageSrc } from "../services/contentService";
 
 const events = [
     {
@@ -71,82 +71,16 @@ const events = [
     },
 ];
 
-const activitiesCards = [
-    {
-        imageSrc: "",
-        imageAlt: "Book Distribution",
-        title: "Book Distribution",
-        previewText:
-            "Distributing Transcendental knowledge through Srila Prabhupada's books",
-    },
-    {
-        imageSrc: "",
-        imageAlt: "Prasadam Distribution",
-        title: "Prasadam Distribution",
-        previewText:
-            "Serving Krishna Prasadam (sanctified vegetarian food) to everyone",
-    },
-    {
-        imageSrc: "",
-        imageAlt: "Nagara Sankirtan",
-        title: "Nagara Sankirtan",
-        previewText: "Congregational chanting of the holy names in the streets",
-    },
-    {
-        imageSrc: "",
-        imageAlt: "Enlightening sessions",
-        title: "Enlightening sessions",
-        previewText: "Enlightening discussions and spiritual sessions",
-    },
-    {
-        imageSrc: "",
-        imageAlt: "Festivals & Celebrations",
-        title: "Festivals & Celebrations",
-        previewText: "Observing Vaishnava festivals with love and devotion",
-    },
-    {
-        imageSrc: "",
-        imageAlt: "Youth & Kids Programs",
-        title: "Youth & Kids Programs",
-        previewText: "Nurturing Krishna consciousness in young hearts",
-    },
-    {
-        imageSrc: "",
-        imageAlt: "Sunday Feast Program",
-        title: "Sunday Feast Program",
-        previewText:
-            "A weekly festival like evening of devotion, kirtan, and sumptuous prasadam",
-    },
-];
-
-function Events() {
+function Sevas() {
     const [sevaEvents, setSevaEvents] = useState(events);
-    const [festivalEvents, setFestivalEvents] = useState<any[]>([]);
 
     useEffect(() => {
         const loadContent = async () => {
-            const data = await fetchPublicContent(["SEVA", "FESTIVAL"]);
-            console.log(data);
+            const data = await fetchPublicContent(["SEVA"]);
             if (data && data.length > 0) {
                 const sevas = data
-                    .filter((item) => item.type === "SEVA")
-                    .map((item) => ({
-                        title: item.title,
-                        previewText: item.previewText || "",
-                        fullText: item.fullText || "",
-                        quote: item.quote || "",
-                        imageSrc: getImageSrc(item.images?.[0]) || "",
-                        imageAlt: item.title,
-                        linkHref: "/donate#seva-options",
-                        linkText: "Support Us",
-                        startDate: item.showFromDate,
-                        endDate: item.showToDate,
-                        type: item.type,
-                    }));
-
-                const festivals = data
-                    .filter((item) => item.type === "FESTIVAL")
-                    .map((item) => ({
+                    .filter((item: any) => item.type === "SEVA")
+                    .map((item: any) => ({
                         title: item.title,
                         previewText: item.previewText || "",
                         fullText: item.fullText || "",
@@ -161,7 +95,6 @@ function Events() {
                     }));
 
                 setSevaEvents(sevas.length > 0 ? sevas : events);
-                setFestivalEvents(festivals);
             }
         };
         loadContent();
@@ -174,31 +107,6 @@ function Events() {
 
     return (
         <div className="events-page">
-            {/* Programs & Activities Section */}
-            <Section
-                title="Programs & Activities"
-                subtitle="At ISKM Proddatur, we joyfully engage in various devotional activities to serve the community and spread Krishna consciousness."
-                cards={activitiesCards}
-                backgroundType={alternateColors(index++)}
-                className="activities-section mt-0"
-                showLink={false}
-                type="Bootstrap"
-            />
-
-            {/* Festivals Section */}
-            {festivalEvents.length > 0 && (
-                <Section
-                    title="Festivals"
-                    subtitle="Join us in celebrating our major festivals with devotion and joy"
-                    cards={festivalEvents}
-                    backgroundType={alternateColors(index++)}
-                    className="festivals-section"
-                    showLink={false}
-                    type="Custom"
-                />
-            )}
-
-            {/* Sevas Section */}
             <Section
                 title="Our Divine Sevas"
                 subtitle="Participate in these sacred services and receive the blessings of the Lord"
@@ -208,8 +116,7 @@ function Events() {
                 showLink={false}
                 type="Custom"
             />
-
-            {/* Donate Section */}
+            
             <Section
                 title="Donate & Participate in Divine Seva"
                 subtitle={
@@ -253,4 +160,4 @@ function Events() {
     );
 }
 
-export default Events;
+export default Sevas;

@@ -6,7 +6,7 @@
 /* Hero Section */
 .events-hero {
   background-color: #ffe6f2;
-  background-color: #ffd8ef;
+  background-color: var(--color-light-pink);
   padding: 3rem 0;
   margin-bottom: 2rem;
 }

@@ -1,3 +1,11 @@
+:root {
+    --color-light-pink: #ffd8ef;
+}
+
+.bg-color-light-pink {
+    background-color: var(--color-light-pink) !important;
+}
+
 .htl-txt-ct-1 {
     background: rgba(255, 255, 255, 0.8);
     padding: 2rem;
@@ -39,7 +47,7 @@
 }
 
 .quote-bx--pink {
-  background-color: #ffd8ef;
+  background-color: var(--color-light-pink);
   border-left: 4px solid #eda4f5;
   color: #2c3e50;
 }
@@ -51,7 +59,7 @@
 
 /* Hero Section */
 .about-hero {
-    background: #ffd8ef;
+    background: var(--color-light-pink);
     padding: 3rem 4rem;
     position: relative;
     overflow: hidden;

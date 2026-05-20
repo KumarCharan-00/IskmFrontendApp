@@ -23,6 +23,7 @@ interface SectionProps {
     bodyElement?: ReactNode;
     footerElement?: ReactNode;
     id?: string;
+    showTitle?: boolean;
     startDate?: string;
     endDate?: string;
 }
@@ -152,7 +153,9 @@ export const Section: React.FC<SectionProps> = (props) => {
         >
             <div className="section-container">
                 <div className="section-header">
-                    <h2 className="section-title">{props.title}</h2>
+                    {(props.showTitle ?? true) && props.title && (
+                        <h2 className="section-title">{props.title}</h2>
+                    )}
                     {props.subtitle && (
                         <p className="section-subtitle">{props.subtitle}</p>
                     )}

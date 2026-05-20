@@ -48,11 +48,25 @@ function SiteNavbar() {
                             Home
                         </NavLink>
                         <NavLink
-                            to="/events"
+                            to="/activities"
                             className={linkClassNames}
                             style={navBtnStyle}
                         >
-                            Events
+                            Activities
+                        </NavLink>
+                        <NavLink
+                            to="/festivals-events"
+                            className={linkClassNames}
+                            style={navBtnStyle}
+                        >
+                            Festivals & Events
+                        </NavLink>
+                        <NavLink
+                            to="/sevas"
+                            className={linkClassNames}
+                            style={navBtnStyle}
+                        >
+                            Sevas
                         </NavLink>
                         {/* <NavLink to="/vaishnava-calendar" className={linkClassNames} style={navBtnStyle}>Vaishnava Calendar</NavLink> */}
                         <NavLink

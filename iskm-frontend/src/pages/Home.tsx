@@ -24,7 +24,7 @@ const slides = [
         description:
             "Join us for festivals, events, and spiritual gatherings that bring you closer to Kṛṣṇa",
         imageSrc: c2,
-        buttonHref: "/events",
+        buttonHref: "/festivals-events",
         buttonText: "Explore Events",
     },
     {
@@ -147,7 +147,7 @@ export default function Home() {
                         quote: item.quote || "",
                         imageSrc: getImageSrc(item.images?.[0]) || "",
                         imageAlt: item.title,
-                        linkHref: "/events",
+                        linkHref: "/sevas",
                         linkText: "View All Sevas",
                         type: item.type,
                     }));
@@ -161,7 +161,7 @@ export default function Home() {
                         quote: item.quote || "",
                         imageSrc: getImageSrc(item.images?.[0]) || "",
                         imageAlt: item.title,
-                        linkHref: "/events",
+                        linkHref: "/festivals-events",
                         linkText: "View All Festivals",
                         startDate: item.showFromDate,
                         endDate: item.showToDate,
@@ -188,7 +188,7 @@ export default function Home() {
                     backgroundType="white"
                     className="festivals-section"
                     showLink={false}
-                    linkHref="/events"
+                    linkHref="/festivals-events"
                     linkText="View All Festivals"
                     donate={true}
                     donateText="Donate for Festival"
@@ -233,7 +233,7 @@ export default function Home() {
                 backgroundType="white"
                 className="events-section"
                 showLink={false}
-                linkHref="/events"
+                linkHref="/sevas"
                 linkText="View All Sevas"
                 donate={true}
                 donateText="Join Our Cause"

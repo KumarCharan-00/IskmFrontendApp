@@ -37,14 +37,14 @@ function SocialIcon({
 
 function SiteFooter() {
     return (
-        <footer className="mt-auto pt-4 pb-2" style={{ background: "#ffd8ef" }}>
+        <footer className="pt-4 pb-2 bg-color-light-pink">
             <div className="site-footer-container">
                 <div className="d-flex flex-column flex-lg-row">
                     {/* Left Section */}
                     <div className="align-items-center justify-content-center footer-bottom px-3">
                         <nav className="mb-4 my-4 d-flex flex-wrap gap-3">
-                            <NavLink to="/events" className="medium color-blue">
-                                Events
+                            <NavLink to="/activities" className="medium color-blue">
+                                Activities
                             </NavLink>
                             {/*<NavLink
                                 to="/vaishnava-calendar"

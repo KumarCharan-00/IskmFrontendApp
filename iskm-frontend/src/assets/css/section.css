@@ -3,8 +3,8 @@
   margin: 2rem 0;
   background: linear-gradient(135deg, #e9dff8 0%, #eda4f5 100%);
   background: #ffefff;
-  background: linear-gradient(135deg, #ffdfff 0%, #ffd8ef 100%);
-  background: #ffd8ef;
+  background: linear-gradient(135deg, #ffdfff 0%, var(--color-light-pink) 100%);
+  background: var(--color-light-pink);
   position: relative;
   overflow: hidden;
 }
@@ -248,7 +248,7 @@
 }
 
 .section-footer .btn-danger {
-  background: linear-gradient(90deg, #ffdfff, #ffd8ef);
+  background: linear-gradient(90deg, #ffdfff, var(--color-light-pink));
   color: #2c3e50;
 }
 
@@ -270,7 +270,7 @@
 }
 
 .section--dark .section-footer .btn-danger {
-  background: linear-gradient(90deg, #ffdfff, #ffd8ef);
+  background: linear-gradient(90deg, #ffdfff, var(--color-light-pink));
   color: #2c3e50;
 }
 
