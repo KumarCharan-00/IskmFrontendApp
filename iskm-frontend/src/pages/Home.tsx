@@ -12,7 +12,15 @@ import { Card } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { fetchPublicContent, getImageSrc } from "../services/contentService";
 
-const slides = [
+interface CarouselSlide {
+    title: string;
+    description: string;
+    imageSrc: string;
+    buttonHref?: string;
+    buttonText?: string;
+}
+
+const slides: CarouselSlide[] = [
     {
         title: "Come Closer to Kṛṣṇa",
         description:
@@ -70,7 +78,7 @@ const activities = [
     },
 ];
 
-const Carousal: React.FC = () => {
+const Carousal: React.FC<{ slides: CarouselSlide[] }> = ({ slides }) => {
     return (
         <Container className="carousel-container">
             <Carousel
@@ -96,7 +104,7 @@ const Carousal: React.FC = () => {
                                 >
                                     {slide.description}
                                 </p>
-                                {slide.buttonText && (
+                                {slide.buttonText && slide.buttonHref && (
                                     <Link
                                         to={slide.buttonHref}
                                         className="btn custom-btn-pink blur"
@@ -133,46 +141,67 @@ export default function Home() {
 
     const [sevaEvents, setSevaEvents] = useState(activities);
     const [festivalEvents, setFestivalEvents] = useState<any[]>([]);
+    const [carouselSlides, setCarouselSlides] = useState<CarouselSlide[]>(slides);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const loadContent = async () => {
             try {
-                const data = await fetchPublicContent(["SEVA", "FESTIVAL"], 3);
-            if (data && data.length > 0) {
-                const sevas = data
-                    .filter((item) => item.type === "SEVA")
-                    .map((item) => ({
-                        title: item.title,
-                        previewText: item.previewText || "",
-                        fullText: item.fullText || "",
-                        quote: item.quote || "",
-                        imageSrc: getImageSrc(item.images?.[0]) || "",
-                        imageAlt: item.title,
-                        linkHref: "/sevas",
-                        linkText: "View All Sevas",
-                        type: item.type,
-                    }));
+                const data = await fetchPublicContent(["SEVA", "FESTIVAL", "ACTIVITY", "CAROUSEL"], 15);
+                if (data && data.length > 0) {
+                    const sevas = data
+                        .filter((item) => item.type === "SEVA")
+                        .map((item) => ({
+                            title: item.title,
+                            previewText: item.previewText || "",
+                            fullText: item.fullText || "",
+                            quote: item.quote || "",
+                            imageSrc: getImageSrc(item.images?.[0]) || "",
+                            imageAlt: item.title,
+                            linkHref: "/sevas",
+                            linkText: "View All Sevas",
+                            type: item.type,
+                        }));
 
-                const festivals = data
-                    .filter((item) => item.type === "FESTIVAL")
-                    .map((item) => ({
-                        title: item.title,
-                        previewText: item.previewText || "",
-                        fullText: item.fullText || "",
-                        quote: item.quote || "",
-                        imageSrc: getImageSrc(item.images?.[0]) || "",
-                        imageAlt: item.title,
-                        linkHref: "/festivals-events",
-                        linkText: "View All Festivals",
-                        startDate: item.showFromDate,
-                        endDate: item.showToDate,
-                        type: item.type,
-                    }));
+                    const festivals = data
+                        .filter((item) => item.type === "FESTIVAL")
+                        .map((item) => ({
+                            title: item.title,
+                            previewText: item.previewText || "",
+                            fullText: item.fullText || "",
+                            quote: item.quote || "",
+                            imageSrc: getImageSrc(item.images?.[0]) || "",
+                            imageAlt: item.title,
+                            linkHref: "/festivals-events",
+                            linkText: "View All Festivals",
+                            startDate: item.showFromDate,
+                            endDate: item.showToDate,
+                            type: item.type,
+                        }));
 
-                setSevaEvents(sevas && sevas.length > 0 ? sevas : activities);
-                setFestivalEvents(festivals);
-            }
+                    setSevaEvents(sevas && sevas.length > 0 ? sevas.slice(0, 3) : activities);
+                    setFestivalEvents(festivals);
+
+                    // Get explicitly added CAROUSEL items sorted by creation date descending
+                    const carouselItems = data
+                        .filter((item) => item.type === "CAROUSEL")
+                        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+
+                    if (carouselItems.length > 0) {
+                        const dynamicSlides: CarouselSlide[] = carouselItems.map((item) => {
+                            return {
+                                title: item.title,
+                                description: item.fullText || item.previewText || "",
+                                imageSrc: getImageSrc(item.images?.[0]) || c1,
+                                buttonHref: item?.buttonHref || undefined,
+                                buttonText: item?.buttonText || undefined,
+                            };
+                        });
+                        setCarouselSlides(dynamicSlides);
+                    } else {
+                        setCarouselSlides(slides);
+                    }
+                }
             } finally {
                 setLoading(false);
             }
@@ -182,7 +211,7 @@ export default function Home() {
 
     return (
         <div>
-            <Carousal />
+            <Carousal slides={carouselSlides} />
 
             {/* Festival Preview Section */}
             {(loading || festivalEvents.length > 0) && (

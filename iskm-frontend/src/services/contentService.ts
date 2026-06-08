@@ -19,6 +19,8 @@ export interface ContentDTO {
     showToDate?: string;
     createdAt: string;
     images: ImageDTO[];
+    buttonText?: string;
+    buttonHref?: string;
 }
 
 export interface FetchContentResponse {
