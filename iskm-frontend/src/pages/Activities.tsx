@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Section } from "../components/Section";
 import "../assets/css/events.css";
 import bookDistImage from "../assets/images/BhagavadGita.png";
@@ -7,6 +8,7 @@ import sessionsImage from "../assets/images/PrabhupadReading.webp";
 import festivalsImage from "../assets/images/MainIdol.png";
 import youthImage from "../assets/images/youthLearning.jpg";
 import feastImage from "../assets/images/aanadanam2.jpg";
+import { fetchPublicContent, getImageSrc } from "../services/contentService";
 
 const activitiesCards = [
     {
@@ -57,6 +59,47 @@ const activitiesCards = [
 ];
 
 function Activities() {
+    const [activities, setActivities] = useState<any[]>(activitiesCards);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const loadContent = async () => {
+            try {
+                const data = await fetchPublicContent(["ACTIVITY"]);
+                if (data && data.length > 0) {
+                    const loadedActivities = data
+                        .filter((item: any) => item.type === "ACTIVITY")
+                        .map((item: any) => {
+                            let queryParams = "";
+                            if (item.seva?.id) {
+                                queryParams = `?sevaId=${item.seva.id}`;
+                                if (item.sevaSubType?.id) {
+                                    queryParams += `&subTypeId=${item.sevaSubType.id}`;
+                                }
+                            }
+                            return {
+                                title: item.title,
+                                previewText: item.previewText || "",
+                                fullText: item.fullText || "",
+                                quote: item.quote || "",
+                                imageSrc: getImageSrc(item.images?.[0]) || "",
+                                imageAlt: item.title,
+                                linkHref: `/donate${queryParams}#seva-options`,
+                                linkText: "Support Us",
+                                startDate: item.showFromDate,
+                                endDate: item.showToDate,
+                                type: item.type,
+                            };
+                        });
+                    setActivities(loadedActivities.length > 0 ? loadedActivities : activitiesCards);
+                }
+            } finally {
+                setLoading(false);
+            }
+        };
+        loadContent();
+    }, []);
+
     let index = 0;
     const alternateColors = (index: number) => {
         if (index === 0) return "white";
@@ -69,11 +112,13 @@ function Activities() {
             <Section
                 title="Programs & Activities"
                 subtitle="At ISKM Proddatur, we joyfully engage in various devotional activities to serve the community and spread Krishna consciousness."
-                cards={activitiesCards}
+                cards={activities}
                 backgroundType={alternateColors(index++)}
                 className="activities-section mt-0"
                 showLink={false}
                 type="Custom"
+                loading={loading}
+                loadingCount={3}
             />
 
             {/* Donate Section */}
