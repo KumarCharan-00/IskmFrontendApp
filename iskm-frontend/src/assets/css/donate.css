@@ -21,15 +21,23 @@
 
 .donation-cards-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: stretch;
   justify-content: center;
+  gap: 1.5rem;
+  width: 100%;
 }
 
 .donation-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: 1px solid transparent;
   border-radius: 15px;
+  flex: 0 1 calc(50% - 1.5rem);
+  max-width: 50rem;
+  /* Prevents cards from becoming too wide on large screens */
+  width: 100%;
+  /* Ensures card fills its allocated flex space */
 }
 
 .donation-card:hover {
@@ -61,7 +69,15 @@
 
 @media (min-width: 992px) {
   .donation-card {
-    width: 80vw;
+    /* Reset or specific styles for large screens if needed, 
+       but keeping flex logic is usually sufficient */
+    width: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .donation-card {
+    flex: 1 1 100%;
   }
 }
 

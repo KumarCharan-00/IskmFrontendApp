@@ -1,4 +1,4 @@
-import React, { useState, type ReactElement, useId } from "react";
+import React, { useState, useEffect, type ReactElement, useId } from "react";
 import {
     Container,
     Row,
@@ -9,6 +9,7 @@ import {
 } from "react-bootstrap";
 import { Section } from "../components/Section";
 import "../assets/css/donate.css";
+import upiQr from "../assets/images/upi-qr.png";
 
 interface FloatingFormType {
     type?: string;
@@ -20,6 +21,8 @@ interface FloatingFormType {
     labelVal: string;
     required?: boolean;
     color?: "blue" | "pink";
+    error?: string;
+    disabled?: boolean;
 }
 
 declare global {
@@ -34,6 +37,8 @@ const FloatingForm: React.FC<FloatingFormType> = ({
     type = "text",
     color = "pink",
     as,
+    error,
+    disabled = false,
     ...props
 }): ReactElement => {
     if (className.includes("form-input")) {
@@ -52,40 +57,121 @@ const FloatingForm: React.FC<FloatingFormType> = ({
                 placeholder=" "
                 className={className}
                 autoComplete={props.name}
+                isInvalid={!!error}
+                disabled={disabled}
             />
             <Form.Label htmlFor={id}>{props.labelVal}</Form.Label>
+            <Form.Control.Feedback type="invalid">
+                {error}
+            </Form.Control.Feedback>
         </Form.Floating>
     );
 };
 
-const contactCards = [
-    {
-        title: "UPI Details",
-        previewText: (
-            <div className="mb-4">
-                <h6 className="text-primary">
-                    <i className="bi bi-bank me-2"></i> UPI IDs
-                </h6>
-                <div className="fw-bold">
-                    <div>iskmproddutur@ybl</div>
-                    <div>iskmproddutur@sbipay</div>
-                    <div>iskmproddutur@hdfcpay</div>
+const directDonationCard: ReactElement = (
+    <BSCard
+        className="shadow-lg border-0 mx-auto w-100"
+        style={{ maxWidth: "1000px", borderRadius: "1rem" }}
+    >
+        <BSCard.Body className="p-4 p-md-5">
+            <div className="d-flex flex-column flex-md-row justify-content-between align-items-center align-items-md-stretch gap-4 gap-md-5">
+                {/* Left: UPI Details */}
+                <div
+                    className="d-flex flex-column justify-content-center align-items-center w-100 h-100"
+                    style={{ flex: 1 }}
+                >
+                    <h5 className="text-primary mb-3 text-center w-100 fw-bold">
+                        <i className="bi bi-bank me-2"></i> UPI ID & QR
+                    </h5>
+                    <div className="fw-bold fs-5 mb-3 text-center text-dark">
+                        iskmproddatur@ptyes
+                    </div>
+                    <div className="qr-code-container text-center bg-white p-2 rounded shadow-sm border">
+                        <img
+                            src={upiQr}
+                            alt="UPI QR Code"
+                            className="img-fluid rounded"
+                            style={{ maxWidth: "200px" }}
+                            title="Scan to pay with any UPI app"
+                        />
+                        <div className="mt-2 text-muted small fw-medium">
+                            Scan to pay with any UPI app
+                        </div>
+                    </div>
+                    <div className="text-center mt-3">
+                        <h5>
+                            <b>Iskm Proddatur</b>
+                        </h5>
+                    </div>
+                    <div className="text-center">
+                        <small>
+                            Please use the above UPI ID to donate to ISKM
+                            Proddatur
+                        </small>
+                    </div>
+                </div>
+
+                {/* Vertical/Horizontal Divider */}
+                <div className="d-block d-md-none w-100 border-top my-2"></div>
+                <div className="d-none d-md-block border-start opacity-75"></div>
+
+                {/* Right: Bank Details */}
+                <div
+                    className="w-100 d-flex flex-column justify-content-center h-100"
+                    style={{ flex: 1 }}
+                >
+                    <h5 className="text-primary mb-md-5 mb-3 text-center text-md-start w-100 fw-bold">
+                        TRUST BANK ACCOUNT DETAILS
+                    </h5>
+                    <div className="fs-6 w-100 text-center text-md-start mt-md-2">
+                        <div className="mb-3">
+                            <span className="text-secondary d-block small mb-1 fw-semibold">
+                                BANK NAME
+                            </span>
+                            <span className="fw-bold text-dark fs-5">
+                                KARUR VYSYA BANK
+                            </span>
+                        </div>
+                        <div className="mb-3">
+                            <span className="text-secondary d-block small mb-1 fw-semibold">
+                                ACCOUNT NUMBER
+                            </span>
+                            <span className="fw-bold text-dark fs-5">
+                                1407010000000407
+                            </span>
+                        </div>
+                        <div className="mb-3">
+                            <span className="text-secondary d-block small mb-1 fw-semibold">
+                                ACCOUNT NAME
+                            </span>
+                            <span
+                                className="fw-bold text-dark fs-6"
+                                style={{ wordBreak: "break-word" }}
+                            >
+                                ISKM PRODDATUR
+                            </span>
+                        </div>
+                        <div className="d-flex flex-row justify-content-center justify-content-md-start gap-4 mt-2"></div>
+                        <div className="mb-3">
+                            <span className="text-secondary d-block small mb-1 fw-semibold">
+                                ACCOUNT TYPE
+                            </span>
+                            <span className="fw-bold text-dark">Current</span>
+                        </div>
+                        <div className="mb-3">
+                            <span className="text-secondary d-block small mb-1 fw-semibold">
+                                IFSC CODE
+                            </span>
+                            <span className="fw-bold text-dark">
+                                KVBL0001407
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        ),
-    },
-    {
-        title: "Bank Account Details",
-        previewText: (
-            <div className="mb-0">
-                <h6 className="text-primary">Bank Account Details</h6>
-                <p>
-                    <em>(Account details)</em>
-                </p>
-            </div>
-        ),
-    },
-];
+        </BSCard.Body>
+    </BSCard>
+);
 
 const cleanupRazorpay = (): void => {
     // Remove Razorpay containers
@@ -105,7 +191,14 @@ const cleanupRazorpay = (): void => {
     document.body.style.width = "";
 };
 
+import { useLocation } from "react-router-dom";
+
 function DonatePage() {
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const initialSeva = searchParams.get("sevaId") || "general";
+    const initialSubType = searchParams.get("subTypeId") || "";
+
     const [customAmount, setCustomAmount] = useState(false);
     const [isProcessing, setIsProcessing] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
@@ -116,14 +209,106 @@ function DonatePage() {
         email: "",
         message: "",
     });
+    const [contactErrors, setContactErrors] = useState({
+        name: "",
+        email: "",
+    });
 
-    // Payment Form State
     const [paymentForm, setPaymentForm] = useState({
         name: "",
         phone: "",
         email: "",
         amount: "",
     });
+    const [paymentErrors, setPaymentErrors] = useState({
+        name: "",
+        phone: "",
+        email: "",
+        amount: "",
+    });
+
+    const [sevas, setSevas] = useState<any[]>([]);
+    const [subTypes, setSubTypes] = useState<any[]>([]);
+    const [selectedSeva, setSelectedSeva] = useState<string>(initialSeva);
+    const [selectedSubType, setSelectedSubType] = useState<string>(initialSubType);
+
+    useEffect(() => {
+        const fetchSevas = async () => {
+            try {
+                const baseUrl =
+                    (window as any).ENV?.VITE_API_BASE_URL ||
+                    import.meta.env.VITE_API_BASE_URL ||
+                    "http://localhost:8080";
+                const response = await fetch(`${baseUrl}/api/sevas`);
+                if (response.ok) {
+                    const data = await response.json();
+                    setSevas(data);
+                }
+            } catch (e) {
+                console.error("Failed to fetch sevas:", e);
+            }
+        };
+        fetchSevas();
+    }, []);
+
+    useEffect(() => {
+        if (selectedSeva && selectedSeva !== "general") {
+            const fetchSubTypes = async () => {
+                try {
+                    const baseUrl =
+                        (window as any).ENV?.VITE_API_BASE_URL ||
+                        import.meta.env.VITE_API_BASE_URL ||
+                        "http://localhost:8080";
+                    const response = await fetch(
+                        `${baseUrl}/api/sevas/${selectedSeva}/subtypes`,
+                    );
+                    if (response.ok) {
+                        const data = await response.json();
+                        setSubTypes(data);
+                    }
+                } catch (e) {
+                    console.error("Failed to fetch sub types:", e);
+                }
+            };
+            fetchSubTypes();
+        } else {
+            setSubTypes([]);
+            setSelectedSubType("");
+        }
+    }, [selectedSeva]);
+
+    useEffect(() => {
+        if (selectedSubType && subTypes.length > 0) {
+            const st = subTypes.find((s) => s.id === selectedSubType);
+            if (st && !st.isGeneralDonation && st.amount) {
+                setPaymentForm((prev) => ({ ...prev, amount: st.amount.toString() }));
+                setCustomAmount(true);
+                setPaymentErrors((prev) => ({ ...prev, amount: "" }));
+            }
+        }
+    }, [selectedSubType, subTypes]);
+
+    const handleSubTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const val = e.target.value;
+        setSelectedSubType(val);
+        const st = subTypes.find((s) => s.id === val);
+        if (st) {
+            if (!st.isGeneralDonation && st.amount) {
+                setPaymentForm((prev) => ({ ...prev, amount: st.amount.toString() }));
+                setCustomAmount(true);
+                setPaymentErrors((prev) => ({ ...prev, amount: "" }));
+            } else {
+                setPaymentForm((prev) => ({ ...prev, amount: "" }));
+                setCustomAmount(false);
+            }
+        }
+    };
+
+    const selectedSubTypeObj = subTypes.find((s) => s.id === selectedSubType);
+    const isFixedAmount =
+        selectedSubTypeObj &&
+        !selectedSubTypeObj.isGeneralDonation &&
+        selectedSubTypeObj.amount;
 
     const CUSTOM_AMOUNT: string = "CUSTOM";
     const amountOptions: Array<string> = [
@@ -134,11 +319,44 @@ function DonatePage() {
         "CUSTOM",
     ];
 
+    const validateName = (name: string) => {
+        const regex = /^[a-zA-Z\s.]*$/;
+        return regex.test(name)
+            ? ""
+            : "Name should only contain letters or dots";
+    };
+
+    const validateEmail = (email: string) => {
+        const regex = /^[a-zA-Z+.]+@[a-zA-Z]{2,}\.[a-zA-Z]{2,}$/;
+        return regex.test(email) ? "" : "Invalid email format";
+    };
+
+    const validatePhone = (phone: string) => {
+        const regex = /^\d*$/;
+        return regex.test(phone)
+            ? ""
+            : "Mobile number should only contain digits";
+    };
+
+    const validateAmountVal = (amount: string) => {
+        const regex = /^\d*$/;
+        return regex.test(amount) ? "" : "Amount must be a positive number";
+    };
+
     const handleContactSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
         const { name, email, message } = contactForm;
-        const whatsappNumber = "918466024968";
+
+        const nameError = validateName(name);
+        const emailError = validateEmail(email);
+
+        if (nameError || emailError) {
+            setContactErrors({ name: nameError, email: emailError });
+            return;
+        }
+
+        const whatsappNumber = "917893636462";
 
         const text = `Name: ${name} \nEmail: ${email} \nQuery: ${message}`;
 
@@ -148,10 +366,28 @@ function DonatePage() {
         window.open(whatsappUrl, "_blank");
 
         setContactForm({ name: "", email: "", message: "" });
+        setContactErrors({ name: "", email: "" });
     };
 
     const handlePaymentSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        const { name, phone, email, amount } = paymentForm;
+
+        const nameError = validateName(name);
+        const phoneError = validatePhone(phone);
+        const emailError = validateEmail(email);
+        const amountError = validateAmountVal(amount);
+
+        if (nameError || phoneError || emailError || amountError) {
+            setPaymentErrors({
+                name: nameError,
+                phone: phoneError,
+                email: emailError,
+                amount: amountError,
+            });
+            return;
+        }
 
         console.log("Payment Form Submitted:", {
             ...paymentForm,
@@ -161,18 +397,38 @@ function DonatePage() {
     };
 
     const handleContactChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => {
+        const { name, value } = e.target;
+        let error = "";
+        if (name === "name") error = validateName(value);
+        if (name === "email") error = validateEmail(value);
+
         setContactForm({
             ...contactForm,
-            [e.target.name]: e.target.value,
+            [name]: value,
+        });
+        setContactErrors({
+            ...contactErrors,
+            [name]: error,
         });
     };
 
     const handlePaymentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        let error = "";
+        if (name === "name") error = validateName(value);
+        if (name === "phone") error = validatePhone(value);
+        if (name === "email") error = validateEmail(value);
+        if (name === "amount") error = validateAmountVal(value);
+
         setPaymentForm({
             ...paymentForm,
-            [e.target.name]: e.target.value,
+            [name]: value,
+        });
+        setPaymentErrors({
+            ...paymentErrors,
+            [name]: error,
         });
     };
 
@@ -180,12 +436,14 @@ function DonatePage() {
         if (amount === CUSTOM_AMOUNT) {
             paymentForm.amount = "100"; // Minimum Amount
             setCustomAmount(true);
+            setPaymentErrors({ ...paymentErrors, amount: "" });
         } else {
             setPaymentForm({
                 ...paymentForm,
                 amount: amount,
             });
             setCustomAmount(false);
+            setPaymentErrors({ ...paymentErrors, amount: "" });
         }
     };
 
@@ -197,7 +455,10 @@ function DonatePage() {
     };
 
     const contactUsCard: ReactElement = (
-        <BSCard className="h-100 shadow-lg get-in-touch border-0 d-flex flex-column">
+        <BSCard
+            id="get-in-touch"
+            className="h-100 shadow-lg get-in-touch border-0 d-flex flex-column"
+        >
             <BSCard.Header className="query-form-title text-white border-0">
                 <h4 className="mb-0 fw-bold">Get in Touch</h4>
                 <p className="mb-0 mt-1 small opacity-90">
@@ -215,6 +476,7 @@ function DonatePage() {
                             val={contactForm.name}
                             func={handleContactChange}
                             labelVal="Full Name"
+                            error={contactErrors.name}
                         />
                         <FloatingForm
                             type="email"
@@ -222,6 +484,7 @@ function DonatePage() {
                             val={contactForm.email}
                             func={handleContactChange}
                             labelVal="Email Address"
+                            error={contactErrors.email}
                         />
                         <FloatingForm
                             as="textarea"
@@ -246,14 +509,24 @@ function DonatePage() {
     );
 
     const donateUsCard: ReactElement = (
-        <BSCard className="h-100 shadow-lg donate-card border-0 d-flex flex-column">
+        <BSCard
+            id="donate-card"
+            className="h-100 shadow-lg donate-card border-0 d-flex flex-column"
+        >
             <BSCard.Header className="donate-form-title text-white border-0">
                 <h4 className="mb-0 fw-bold">Make a Donation</h4>
                 <p className="mb-0 mt-1 small opacity-90">
-                    Support our cause with your generosity
+                    Support Śrīla Prabhupāda’s cause with your generosity
                 </p>
             </BSCard.Header>
             <BSCard.Body className="donate-form-body d-flex flex-column flex-grow-1">
+                {/* <div className="text-center my-auto p-4 text-muted">
+                    <p className="mb-0">
+                        We are working on the payment gateway. Sorry for the
+                        inconvenience and donate through the direct payment
+                        options.
+                    </p>
+                </div> */}
                 <Form
                     onSubmit={handlePaymentSubmit}
                     className="d-flex flex-column h-100"
@@ -265,6 +538,7 @@ function DonatePage() {
                             func={handlePaymentChange}
                             labelVal="Full Name"
                             color="blue"
+                            error={paymentErrors.name}
                         />
                         <FloatingForm
                             type="tel"
@@ -273,6 +547,7 @@ function DonatePage() {
                             func={handlePaymentChange}
                             labelVal="Mobile Number"
                             color="blue"
+                            error={paymentErrors.phone}
                         />
                         <FloatingForm
                             type="email"
@@ -281,45 +556,96 @@ function DonatePage() {
                             func={handlePaymentChange}
                             labelVal="Email"
                             color="blue"
+                            error={paymentErrors.email}
                         />
 
-                        <Form.Group className="mb-3">
-                            <div className="donation-label fw-semibold mb-3">
-                                Donation Amount (₹)
-                            </div>
-                            <div className="amount-buttons-container d-flex flex-wrap gap-2 mb-3">
-                                {amountOptions.map((amount) => (
-                                    <Button
-                                        key={amount}
-                                        variant={
-                                            btnActiveState(amount)
-                                                ? "primary"
-                                                : "outline-primary"
-                                        }
-                                        className={`amount-btn flex-grow-1 ${
-                                            btnActiveState(amount)
-                                                ? "amount-btn-active"
-                                                : ""
-                                        }`}
-                                        onClick={() => handleAmount(amount)}
-                                        type="button"
-                                    >
-                                        {amount === CUSTOM_AMOUNT
-                                            ? "Enter Amount"
-                                            : "₹" + amount}
-                                    </Button>
+                        <Form.Floating className="mb-3">
+                            <Form.Select
+                                id="sevaSelect"
+                                value={selectedSeva}
+                                onChange={(e) => {
+                                    setSelectedSeva(e.target.value);
+                                    if (e.target.value === "general") {
+                                        setPaymentForm((prev) => ({ ...prev, amount: "" }));
+                                        setCustomAmount(false);
+                                    }
+                                }}
+                                className="form-input-blue"
+                            >
+                                <option value="general">General Donation</option>
+                                {sevas.map((s) => (
+                                    <option key={s.id} value={s.id}>
+                                        {s.name}
+                                    </option>
                                 ))}
-                            </div>
-                            {customAmount && (
-                                <FloatingForm
-                                    type="number"
-                                    name="amount"
-                                    val={paymentForm.amount}
-                                    func={handlePaymentChange}
-                                    labelVal="Amount in Rupees (INR)"
-                                />
-                            )}
-                        </Form.Group>
+                            </Form.Select>
+                            <Form.Label htmlFor="sevaSelect">Donation Type</Form.Label>
+                        </Form.Floating>
+
+                        {selectedSeva !== "general" && (
+                            <Form.Floating className="mb-3">
+                                <Form.Select
+                                    id="subTypeSelect"
+                                    value={selectedSubType}
+                                    onChange={handleSubTypeChange as any}
+                                    className="form-input-blue"
+                                >
+                                    <option value="" disabled>
+                                        Select Sub Type
+                                    </option>
+                                    {subTypes.map((st) => (
+                                        <option key={st.id} value={st.id}>
+                                            {st.name} {st.isGeneralDonation ? "(General)" : `(₹${st.amount})`}
+                                        </option>
+                                    ))}
+                                </Form.Select>
+                                <Form.Label htmlFor="subTypeSelect">Seva Sub Type</Form.Label>
+                            </Form.Floating>
+                        )}
+
+                        {(selectedSeva === "general" || selectedSubTypeObj) && (
+                            <Form.Group className="mb-3">
+                                <div className="donation-label fw-semibold mb-3">
+                                    Donation Amount (₹)
+                                </div>
+                                {!isFixedAmount && (
+                                    <div className="amount-buttons-container d-flex flex-wrap gap-2 mb-3">
+                                        {amountOptions.map((amount) => (
+                                            <Button
+                                                key={amount}
+                                                variant={
+                                                    btnActiveState(amount)
+                                                        ? "primary"
+                                                        : "outline-primary"
+                                                }
+                                                className={`amount-btn flex-grow-1 ${
+                                                    btnActiveState(amount)
+                                                        ? "amount-btn-active"
+                                                        : ""
+                                                }`}
+                                                onClick={() => handleAmount(amount)}
+                                                type="button"
+                                            >
+                                                {amount === CUSTOM_AMOUNT
+                                                    ? "Enter Amount"
+                                                    : "₹" + amount}
+                                            </Button>
+                                        ))}
+                                    </div>
+                                )}
+                                {(customAmount || isFixedAmount) && (
+                                    <FloatingForm
+                                        type="number"
+                                        name="amount"
+                                        val={paymentForm.amount}
+                                        func={handlePaymentChange}
+                                        labelVal="Amount in Rupees (INR)"
+                                        error={paymentErrors.amount}
+                                        disabled={!!isFixedAmount}
+                                    />
+                                )}
+                            </Form.Group>
+                        )}
                     </div>
 
                     <Button
@@ -375,23 +701,24 @@ function DonatePage() {
 
         try {
             console.log("started API call");
+            const baseUrl =
+                (window as any).ENV?.VITE_API_BASE_URL ||
+                import.meta.env.VITE_API_BASE_URL ||
+                "http://localhost:8080";
             // Call your backend API to initiate payment
-            const response = await fetch(
-                "http://localhost:8080/generate-pay-req",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Access-Controle-Allow-Origin": "*",
-                    },
-                    body: JSON.stringify({
-                        name: paymentForm.name,
-                        amount: parseInt(amount),
-                        email: paymentForm.email,
-                        phone: paymentForm.phone,
-                    }),
-                }
-            );
+            const response = await fetch(`${baseUrl}/api/pay-req`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Access-Controle-Allow-Origin": "*",
+                },
+                body: JSON.stringify({
+                    name: paymentForm.name,
+                    amount: parseInt(amount),
+                    email: paymentForm.email,
+                    phone: paymentForm.phone,
+                }),
+            });
 
             if (!response.ok) {
                 throw new Error("Payment initiation failed");
@@ -435,13 +762,14 @@ function DonatePage() {
         } finally {
             setIsProcessing(false);
             setPaymentForm({ name: "", phone: "", email: "", amount: "" });
+            setPaymentErrors({ name: "", phone: "", email: "", amount: "" });
         }
     };
 
     return (
         <div className="donate-page">
             <Section
-                title="Support Our Mission"
+                title="Support Śrīla Prabhupāda’s Mission"
                 subtitle="Join us in making a difference"
                 content="Your generous donation helps us continue our
                                 spiritual and community services, spread
@@ -479,7 +807,8 @@ function DonatePage() {
                 title="Get in Touch & Support Our Mission"
                 subtitle="Contact us for queries or make a donation to support our spiritual activities"
                 backgroundType="white"
-                className="forms-section"
+                className="seva-section"
+                id="seva-options"
                 type="TextOnly"
                 bodyElement={
                     <Container fluid className="py-4">
@@ -496,9 +825,13 @@ function DonatePage() {
                 title="Direct Donation Methods"
                 subtitle="Offer your seva through Bank Transfer, UPI, or In-Person Donation at the temple."
                 backgroundType="blue"
-                className="contact-info-section mb-0"
-                type="Bootstrap"
-                cards={contactCards}
+                className="contact-info-section mb-0 py-5"
+                type="TextOnly"
+                bodyElement={
+                    <Container fluid="lg" className="py-2">
+                        {directDonationCard}
+                    </Container>
+                }
             />
         </div>
     );

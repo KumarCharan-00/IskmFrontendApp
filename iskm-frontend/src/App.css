@@ -31,12 +31,36 @@ body {
   transition: all ease 0.25s;
 }
 
+.t-justify {
+  text-align: justify !important;
+}
+
+.t-center {
+  text-align: center !important;
+}
+
 .color-blue {
   color: #2968a8 !important;
 }
 
 .color-pink {
   color: #ee5fb7 !important;
+}
+
+.color-white {
+  color: white !important;
+}
+
+.bg-color-pink {
+  background-color: #ee5fb7 !important;
+}
+
+.bg-color-blue {
+  background-color: rgb(52, 94, 167, 0.05) !important;
+}
+
+.bg-color-white {
+  background-color: white !important;
 }
 
 .custom-btn,
@@ -236,7 +260,7 @@ body {
   border-color: #dc3545;
 }
 
-.form-control:valid:not(:placeholder-shown) {
+.form-control:valid:not(:placeholder-shown):not(.is-invalid) {
   border-color: #28a745;
 }
 

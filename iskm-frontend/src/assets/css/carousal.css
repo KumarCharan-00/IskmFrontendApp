@@ -3,19 +3,19 @@
 @media (min-width: 996px) {
     .container.carousel-container {
         padding: 2vh 7vw !important;
-    }   
+    }
 }
 
 .container.carousel-container {
     padding: 2vh 2vw;
-} 
+}
 
 /* Style the arrow icon itself */
 .custom-carousel .carousel-control-prev-icon,
 .custom-carousel .carousel-control-next-icon {
-    background-size: 60% 60%; /* smaller arrow graphic */
-    filter: brightness(100) saturate(100%) invert(20%) sepia(10%) saturate(500%)
-        hue-rotate(180deg);
+    background-size: 60% 60%;
+    /* smaller arrow graphic */
+    filter: brightness(100) saturate(100%) invert(20%) sepia(10%) saturate(500%) hue-rotate(180deg);
     padding: 2vw;
 }
 
@@ -69,12 +69,12 @@
     }
 
     .carousel-caption h2 {
-        font-size: 1.25rem; 
+        font-size: 1.25rem;
     }
 
     .carousel-caption p {
-        font-size: 0.95rem; 
-    }  
+        font-size: 0.95rem;
+    }
 
 }
 
@@ -99,7 +99,7 @@
 }
 
 /* Ensure slide content is properly centered */
-.carousel-item.active .slide-content {
+.custom-carousel .slide-content {
     z-index: 2;
     display: flex !important;
     flex-direction: column;
@@ -133,7 +133,6 @@
 .custom-carousel .carousel-item {
     min-height: 10vh;
     position: relative;
-    display: flex;
     align-items: center;
     justify-content: center;
 }
@@ -150,15 +149,15 @@
 /* Dissolve arrow background unless hovered */
 .custom-carousel .carousel-control-prev,
 .custom-carousel .carousel-control-next {
-    width: 40px; /* smaller width */
+    width: 40px;
     height: 40px;
     padding: 2vw;
-    top: 50%;
-    transform: translateY(-50%);
     background-color: transparent;
     opacity: 1;
+    top: 50%;
+    transform: translateY(-50%);
     transition: background-color 0.3s ease;
-    z-index: 2;
+    z-index: 10;
 }
 
 .custom-carousel .carousel-control-prev:hover,
@@ -172,43 +171,10 @@
 }
 
 .carousel-slide .slide-content {
-    display: none;
     z-index: 0;
     background-color: transparent;
 }
 
 .carousel-item {
     position: relative;
-}
-
-
-/* Bootstrap uses transform to slide items — this restores it */
-.custom-carousel .carousel-item-next,
-.custom-carousel .carousel-item-prev,
-.custom-carousel .carousel-item.active {
-    display: block !important;
-    transform: translateX(0);
-}
-
-.custom-carousel .carousel-item,
-.custom-carousel .carousel-item.active,
-.custom-carousel .carousel-item-next,
-.custom-carousel .carousel-item-prev {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-}
-
-.custom-carousel .carousel-item {
-    transition: transform 0.3s ease-in-out;
-}
-
-/* Slide in from right */
-.custom-carousel .carousel-item-next {
-    transform: translateX(0%);
-}
-
-/* Slide out to left */
-.custom-carousel .carousel-item-prev {
-    transform: translateX(100%);
 }

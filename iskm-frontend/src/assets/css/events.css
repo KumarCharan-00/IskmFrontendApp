@@ -1,12 +1,12 @@
 .events-page {
-  padding: 2rem 0 0;
+  padding: 0 0;
   margin: 0;
 }
 
 /* Hero Section */
 .events-hero {
   background-color: #ffe6f2;
-  background-color: #ffd8ef;
+  background-color: var(--color-light-pink);
   padding: 3rem 0;
   margin-bottom: 2rem;
 }
@@ -97,11 +97,11 @@
 
 /* Responsive Design */
 
-@media (max-width: 768px) {  
+@media (max-width: 768px) {
   .activity-icon {
     font-size: 2.5rem;
   }
-  
+
   .activity-title {
     font-size: 1.1rem;
   }
@@ -112,4 +112,3 @@
     font-size: 2rem;
   }
 }
-

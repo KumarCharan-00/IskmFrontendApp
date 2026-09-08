@@ -1,37 +1,47 @@
 import { Carousel, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "../assets/css/carousal.css";
-import c1 from "../assets/images/carousalImage1.jpg";
-import c2 from "../assets/images/carousalImage2.jpg";
-import c3 from "../assets/images/carousalImage3.jpg";
+import c1 from "../assets/images/MainIdol.png";
+import c2 from "../assets/images/JayaVijaya.png";
+import c3 from "../assets/images/SriPrabhuPadhula.png";
 import { Section } from "../components/Section";
 import annadanamImage from "../assets/images/annadanam.jpg";
 import youthLearningImage from "../assets/images/youthLearning.jpg";
 import aanadanamImage2 from "../assets/images/aanadanam2.jpg";
 import { Card } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { fetchPublicContent, getImageSrc } from "../services/contentService";
 
-const slides = [
+interface CarouselSlide {
+    title: string;
+    description: string;
+    imageSrc: string;
+    buttonHref?: string;
+    buttonText?: string;
+}
+
+const slides: CarouselSlide[] = [
     {
-        title: "Welcome to Our Community",
+        title: "Come Closer to Kṛṣṇa",
         description:
-            "Join us in celebrating spiritual traditions and connecting with like-minded individuals.",
+            "Discover knowledge, devotion, and association that transform your life.",
         imageSrc: c1,
     },
     {
         title: "Upcoming Events",
         description:
-            "Discover our calendar of events, festivals, and gatherings throughout the year.",
+            "Join us for festivals, events, and spiritual gatherings that bring you closer to Kṛṣṇa",
         imageSrc: c2,
-        buttonHref: "/events",
-        buttonText: "View Seva Programs",
+        buttonHref: "/festivals-events",
+        buttonText: "Explore Events",
     },
     {
-        title: "Support Our Mission",
+        title: "Support Śrīla Prabhupāda’s Mission",
         description:
-            "Your donations help us continue our work and serve the community.",
+            "Contribute with love and help us expand Kṛṣṇa consciousness in the community",
         imageSrc: c3,
-        buttonHref: "/donate",
-        buttonText: "Support Us",
+        buttonHref: "/donate#seva-options",
+        buttonText: "Offer Your Seva",
     },
 ];
 
@@ -68,7 +78,7 @@ const activities = [
     },
 ];
 
-const Carousal: React.FC = () => {
+const Carousal: React.FC<{ slides: CarouselSlide[] }> = ({ slides }) => {
     return (
         <Container className="carousel-container">
             <Carousel
@@ -77,7 +87,7 @@ const Carousal: React.FC = () => {
                 indicators={true}
                 className="custom-carousel bg-white rounded shadow-sm position-relative "
                 slide={true}
-                fade={true}
+                fade={false}
                 pause={false}
             >
                 {slides.map((slide, index) => (
@@ -94,10 +104,10 @@ const Carousal: React.FC = () => {
                                 >
                                     {slide.description}
                                 </p>
-                                {slide.buttonText && (
+                                {slide.buttonText && slide.buttonHref && (
                                     <Link
                                         to={slide.buttonHref}
-                                        className="btn custom-btn"
+                                        className="btn custom-btn-pink blur"
                                     >
                                         {slide.buttonText}
                                     </Link>
@@ -129,13 +139,101 @@ export default function Home() {
         },
     ];
 
+    const [sevaEvents, setSevaEvents] = useState(activities);
+    const [festivalEvents, setFestivalEvents] = useState<any[]>([]);
+    const [carouselSlides, setCarouselSlides] = useState<CarouselSlide[]>(slides);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const loadContent = async () => {
+            try {
+                const data = await fetchPublicContent(["SEVA", "FESTIVAL", "ACTIVITY", "CAROUSEL"], 15);
+                if (data && data.length > 0) {
+                    const sevas = data
+                        .filter((item) => item.type === "SEVA")
+                        .map((item) => ({
+                            title: item.title,
+                            previewText: item.previewText || "",
+                            fullText: item.fullText || "",
+                            quote: item.quote || "",
+                            imageSrc: getImageSrc(item.images?.[0]) || "",
+                            imageAlt: item.title,
+                            linkHref: "/sevas",
+                            linkText: "View All Sevas",
+                            type: item.type,
+                        }));
+
+                    const festivals = data
+                        .filter((item) => item.type === "FESTIVAL")
+                        .map((item) => ({
+                            title: item.title,
+                            previewText: item.previewText || "",
+                            fullText: item.fullText || "",
+                            quote: item.quote || "",
+                            imageSrc: getImageSrc(item.images?.[0]) || "",
+                            imageAlt: item.title,
+                            linkHref: "/festivals-events",
+                            linkText: "View All Festivals",
+                            startDate: item.showFromDate,
+                            endDate: item.showToDate,
+                            type: item.type,
+                        }));
+
+                    setSevaEvents(sevas && sevas.length > 0 ? sevas.slice(0, 3) : activities);
+                    setFestivalEvents(festivals);
+
+                    // Get explicitly added CAROUSEL items sorted by creation date descending
+                    const carouselItems = data
+                        .filter((item) => item.type === "CAROUSEL")
+                        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+
+                    if (carouselItems.length > 0) {
+                        const dynamicSlides: CarouselSlide[] = carouselItems.map((item) => {
+                            return {
+                                title: item.title,
+                                description: item.fullText || item.previewText || "",
+                                imageSrc: getImageSrc(item.images?.[0]) || c1,
+                                buttonHref: item?.buttonHref || undefined,
+                                buttonText: item?.buttonText || undefined,
+                            };
+                        });
+                        setCarouselSlides(dynamicSlides);
+                    } else {
+                        setCarouselSlides(slides);
+                    }
+                }
+            } finally {
+                setLoading(false);
+            }
+        };
+        loadContent();
+    }, []);
+
     return (
         <div>
-            <Carousal />
+            <Carousal slides={carouselSlides} />
+
+            {/* Festival Preview Section */}
+            {(loading || festivalEvents.length > 0) && (
+                <Section
+                    title="Upcoming Festivals"
+                    subtitle="Join us in celebrating our major festivals with devotion and joy."
+                    cards={festivalEvents}
+                    backgroundType="white"
+                    className="festivals-section"
+                    showLink={false}
+                    linkHref="/festivals-events"
+                    linkText="View All Festivals"
+                    donate={true}
+                    donateText="Donate for Festival"
+                    type="Custom"
+                    loading={loading}
+                />
+            )}
 
             {/* Custom Donation Section */}
             <Section
-                title="Support Our Mission"
+                title="Support Śrīla Prabhupāda’s Mission"
                 subtitle="Your generous donations help us continue our work and serve the community."
                 content="Join us in making a difference. Your support enables us to expand our programs, maintain our facilities, and reach more individuals with our message of devotion and service."
                 backgroundType="blue"
@@ -143,16 +241,18 @@ export default function Home() {
                 showLink={false}
                 donate={true}
                 donateText="Support Us"
-                linkHref="/donate#seva-donation"
+                linkHref="/donate#get-in-touch"
                 linkText="Join Seva Programs"
                 type="TextOnly"
                 bodyElement={
                     <div className="donation-cards-container">
                         {donationContent.map((item, index) => (
-                            <Card key={index} className="donation-card mb-3">
+                            <Card key={index} className="donation-card">
                                 <Card.Body>
                                     <Card.Title>{item.title}</Card.Title>
-                                    <Card.Text>{item.text}</Card.Text>
+                                    <Card.Text className="t-center">
+                                        {item.text}
+                                    </Card.Text>
                                 </Card.Body>
                             </Card>
                         ))}
@@ -164,15 +264,16 @@ export default function Home() {
             <Section
                 title="Seva Programs"
                 subtitle="Discover the various activities we offer to engage with our community."
-                cards={activities}
+                cards={sevaEvents}
                 backgroundType="white"
                 className="events-section"
                 showLink={false}
-                linkHref="/events"
+                linkHref="/sevas"
                 linkText="View All Sevas"
                 donate={true}
                 donateText="Join Our Cause"
                 type="Custom"
+                loading={loading}
             />
         </div>
     );

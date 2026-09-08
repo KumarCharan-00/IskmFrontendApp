@@ -1,56 +1,57 @@
 .card-body {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    background: transparent;
-    margin: 1vh 1vw;
-    z-index: 2;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: transparent;
+  margin: 1vh 1vw;
+  z-index: 2;
 }
 
 .card-body .card-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
 }
 
 .card-body .card-text {
-    flex-grow: 1;
-    color: #555;
-    text-align: center;
+  flex-grow: 1;
+  color: #555;
+  text-align: center;
+  margin-top: inherit !important;
 }
 
 .card-footer {
-    text-align: center;
-    background: transparent;
-    border-top: none;
+  text-align: center;
+  background: transparent;
+  border-top: none;
 }
 
 .card-image-overlay {
-    position: relative;
-    overflow: visible;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+  position: relative;
+  overflow: visible;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 }
 
 .card-image-overlay::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.2);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 0;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
 }
 
 .card-image-img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    transition: transform 0.3s ease;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
 /* Desktop: Image on left with variable width, consistent height */
@@ -91,7 +92,8 @@
 }
 
 .modal-body {
-  max-height: calc(85vh - 140px); /* Account for header and footer */
+  max-height: calc(85vh - 140px);
+  /* Account for header and footer */
   overflow: hidden;
 }
 
@@ -113,7 +115,7 @@
     max-height: 45vh;
     height: 35vh;
   }
-  
+
   .modal-body {
     flex-direction: column !important;
     max-height: calc(85vh - 140px);
@@ -126,9 +128,10 @@
   .image-container {
     min-height: 240px;
     max-height: 40vh;
-    height: 300px; /* Fixed height for small phones looks cleaner */
+    height: 300px;
+    /* Fixed height for small phones looks cleaner */
   }
-  
+
   .modal-dialog {
     margin: 0.5rem;
   }
@@ -137,7 +140,28 @@
 /* Landscape mobile orientation */
 @media (max-width: 991px) and (orientation: landscape) {
   .image-container {
-    height: 50vh; /* Reduce height in landscape mode */
+    height: 50vh;
+    /* Reduce height in landscape mode */
     max-height: 50vh;
   }
+}
+
+.date-box {
+  border-radius: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.date-label {
+  font-size: 0.85rem;
+}
+
+.festival-date {
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
 }

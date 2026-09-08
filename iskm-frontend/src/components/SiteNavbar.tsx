@@ -48,11 +48,25 @@ function SiteNavbar() {
                             Home
                         </NavLink>
                         <NavLink
-                            to="/events"
+                            to="/activities"
                             className={linkClassNames}
                             style={navBtnStyle}
                         >
-                            Events
+                            Activities
+                        </NavLink>
+                        <NavLink
+                            to="/festivals-events"
+                            className={linkClassNames}
+                            style={navBtnStyle}
+                        >
+                            Festivals & Events
+                        </NavLink>
+                        <NavLink
+                            to="/sevas"
+                            className={linkClassNames}
+                            style={navBtnStyle}
+                        >
+                            Sevas
                         </NavLink>
                         {/* <NavLink to="/vaishnava-calendar" className={linkClassNames} style={navBtnStyle}>Vaishnava Calendar</NavLink> */}
                         <NavLink
@@ -62,6 +76,14 @@ function SiteNavbar() {
                         >
                             About Us
                         </NavLink>
+                        <a
+                            href="https://prabhupadabooks.store/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="nav-link py-2 btn custom-btn color-pink fw-bold"
+                        >
+                            Books
+                        </a>
                         <NavLink
                             to="/donate"
                             className={linkClassNames}
